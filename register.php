@@ -1,32 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="login.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login to Ksiegarnia Internetowa</title>
+    <title>Tworzenie konta</title>
 </head>
 <body>
-    <form action="registrator.php" method="post">
-        <fieldset>
-            <legend>Register</legend>
-            <input type="text" id="imie" requied>
-            <input type="text" id="nazwisko" requied>
-            <input type="tel" id="tel" requied>
-            <input type="mail" id="email" requied>
-            <input type="login" id="login" requied>
-            <input type="password" id="haslo" requied>
-            <button onclick="check();">
-            <a href="login.php">Already have an account?</a>
-        </fieldset>
-    </form>
-
-    <script>
-        function check(){
-            if(document.getElementById("password").value.length < 8){
-                return 1;
-            }
-            return 0;
-        }
-    </script>
+    <div id="form">
+        <form action="registrator.php" method="post">
+                <span>Załóż konto</span>
+                <?php
+                echo "<input type='mail' id='email' name='adres_e_mail' placeholder='e-mail' value='".$_GET["email"]."' requied>";
+                echo "<input type='text' id='login' name='login' placeholder='login' value='".$_GET['login']."' requied>";
+                echo "<input type='password' id='password' name='password' placeholder='hasło' value='".$_GET['password']."' requied>";
+                echo "<input type='tel' id='tel' name='telefon' placeholder='telefon' value='".$_GET['tel']."' requied>";
+                ?>
+                <div id="error">
+                    <?php
+                        if(isset($_GET['err'])){
+                            switch($_GET['err']){
+                                case 1:
+                                    echo "Nie udało się połaczyć z serwerem. Spróbuj później";
+                                    break;
+                                case 2:
+                                    echo "Login jest zajęty. Wymyśl inny";
+                                    break;
+                                case 3:
+                                    echo "Hasło już jest zajęte. Wymyśl inne";
+                                    break;
+                                case 4:
+                                    echo "Na ten adres e-mail już jest założone konto";
+                                    break;
+                                case 5:
+                                    echo "Nie udało się utworzyć konto. Spróbuj później";
+                                    break;
+                                case 6:
+                                    echo "Hasło ma mieć przynajmniej 8 znaków. W tym: <br><ul>
+                                        <li>2 duże litery</li>
+                                        <li>2 małe litery</li>
+                                        <li>2 cyfry</li>
+                                        <li>2 znaki zpecjalne</li>
+                                        <li>nie może zawierać ponad 4 znaków z loginu, imienia, nazwiska, adresu e-mail lub telefonu</li>
+                                    </ul>";
+                                    break;
+                            }
+                        }
+                    ?>
+                </div>
+                <input type="submit">
+                <a href="login.php">Już masz konto?</a>
+        </form>
+    </div>
 </body>
 </html>

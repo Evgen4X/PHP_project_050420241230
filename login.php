@@ -1,32 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="login.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login to Ksiegarnia Internetowa</title>
+    <title>Logowanie</title>
 </head>
 <body>
-    <form action="logger.php" method="post">
-        <fieldset>
-            <legend>Log In</legend>
-            <input type="login" id="login">
-            <input type="password" id="password">
-            <button onclick="check();">
-            <a href="register.php">Create an account</a>
-        </fieldset>
-    </form>
-
-    <script>
-        function check(){
-            if(!document.getElementById("login").value){
-                return 1;
-            } else if(!document.getElementById("password").value){
-                return 2;
-            } else if(document.getElementById("password").value.length < 8){
-                return 3;
-            }
-            return 0;
-        }
-    </script>
+    <div id="form">
+        <form action="logger.php" method="post">
+            <span>Zaloguj się</span>
+            <input type="text" id="login" name="login" placeholder="login" requied>
+            <input type="password" id="password" name="password" placeholder="hasło" requied>
+            <div id="error">
+                <?php
+                    if(isset($_GET['err'])){
+                        switch($_GET['err']){
+                            case 1:
+                                echo "Nie udało się połączyć z serwerem. Spróbuj później";
+                                break;
+                            case 3:
+                                echo "Wystąpił problem z bazą danych. Zgłoś to <a href='report.php'>tutaj</a>";
+                                break;
+                            case 3:
+                                echo "Niepoprawny login lub hasło";
+                                break;
+                        }
+                    }
+                ?>
+            </div>
+            <input type="submit">
+            <a href="register.php">Utwórz konto</a>
+        </form>
+    </div>
 </body>
 </html>

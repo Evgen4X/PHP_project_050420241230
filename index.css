@@ -1,0 +1,32 @@
+/* https://coolors.co/palette/2f2f2f-5b8266-aef6c7-e07a5f-ef6461 */
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	background-color: #ebebeb;
+}
+
+nav {
+	position: absolute;
+	top: 0;
+	width: 100vw;
+	height: 5vh;
+	background-color: #2f2f2f;
+	color: #ebebeb;
+	font-size: larger;
+}
+
+footer {
+	position: absolute;
+	width: 100vw;
+	height: 10vh;
+	bottom: 0;
+	text-align: center;
+	background-color: #2f2f2f;
+	font-size: x-large;
+	color: #ebebeb;
+}

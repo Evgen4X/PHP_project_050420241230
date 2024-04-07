@@ -1,0 +1,114 @@
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+
+body,
+div#form {
+	filter: blur(10%);
+	width: 100vw;
+	height: 100vh;
+	background-color: #ebebeb;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+div#form {
+	background-image: url("login-background.jpg");
+	background-size: 100vw 100vh;
+}
+
+form {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	flex-direction: column;
+	width: 30vw;
+	height: 65vh;
+	border-radius: 10%;
+	box-shadow: 0 0 0.1vw white;
+	background-color: transparent;
+	backdrop-filter: brightness(15%);
+}
+
+#error,
+#error a {
+	font-size: larger;
+	color: red;
+}
+
+form > span {
+	color: #ebebeb;
+	font-size: xx-large;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+input[type="text"],
+input[type="tel"],
+input[type="mail"],
+input[type="password"] {
+	font-size: medium;
+	color: #ebebeb;
+	width: 50%;
+	background: none;
+	outline: none;
+	border: none;
+	border-bottom: 0.1em solid #aef6c7;
+	transition: all 500ms ease-out;
+}
+
+input[type="text"]:hover,
+input[type="tel"]:hover,
+input[type="mail"]:hover,
+input[type="password"]:hover {
+	width: 55%;
+	font-size: large;
+}
+
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="mail"]:focus,
+input[type="password"]:focus {
+	font-size: larger;
+	width: 60%;
+	border-bottom: 0.25em solid #aef6c7;
+}
+
+input[type="text"]::placeholder,
+input[type="tel"]::placeholder,
+input[type="mail"]::placeholder,
+input[type="password"]::placeholder {
+	color: #969696;
+}
+
+:root {
+	--button-border-angle: 90deg;
+}
+
+input[type="submit"] {
+	width: 20%;
+	color: #ebebeb;
+	background-color: transparent;
+	outline: none;
+	padding: 0.35em;
+	border: 0.15rem solid #aef6c7;
+	transition: all 500ms ease-out;
+}
+
+input[type="submit"]:hover {
+	width: 25%;
+	background-color: rgba(255, 255, 255, 0.2);
+}
+
+input[type="submit"]:active {
+	background-color: rgba(255, 255, 255, 0.05);
+}
+
+@keyframes borderRotate {
+	100% {
+		--button-border-angle: 420deg;
+	}
+}
