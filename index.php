@@ -8,6 +8,8 @@
 </head>
 <body>
     <nav><a href="login.php">Log in</a></nav>
+
+    <main></main>
       
     <footer>Created by <a href="github.com/Evgen4X">Evgen4X</a></footer>
 </body>
