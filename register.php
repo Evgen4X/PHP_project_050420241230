@@ -41,7 +41,7 @@
                                     <li>2 małe litery</li>
                                     <li>2 cyfry</li>
                                     <li>2 znaki zpecjalne</li>
-                                    <li>nie może zawierać ponad 4 znaków z loginu, imienia, nazwiska, adresu e-mail lub telefonu</li>
+                                    <li>liczba dzieląca się przez 5</li>
                                 </ul>";
                                 break;
                             case 7:

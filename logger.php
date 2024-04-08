@@ -15,14 +15,14 @@ function encode($text){
 
 $id = mysqli_connect("localhost", "root", "", "ksiegarnia");
 if(!$id){
-    header("Location: login.php?err=1");
+    header("Location: login.php?err=1&errdesc=".mysqli_error($id));
     exit;
 }
 
 $res = mysqli_query($id, "select login, haslo, id_klienta from klient;");
 
 if(!$res){
-    header("Location: login.php?err=2");
+    header("Location: login.php?err=2&errdesc=".mysqli_error($id));
     exit;
 }
 

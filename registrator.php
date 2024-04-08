@@ -34,7 +34,8 @@ if(strlen($haslo) < 8 ||
     !preg_match("/[A-Z]{2,}/", $haslo) ||
     !preg_match("/[a-z]{2,}/", $haslo) ||
     !preg_match("/[0-9]{2,}/", $haslo) ||
-    !preg_match("/[!@#\$%\^&\*\(\)\-_+=\.,<>\[\]\{\}:;\\/`~|\"']{2,}/", $haslo)){
+    !preg_match("/[!@#\$%\^&\*\(\)\-_+=\.,<>\[\]\{\}:;\\/`~|\"']{2,}/", $haslo) ||
+    !preg_match("/[0-9]*[50][^0-9]/", $haslo)){
     header("Location: register.php?err=6&login=".$_POST['login']."&password=$haslo&email=".$_POST['adres_e_mail']."&tel=".$_POST['telefon']);
     exit;
 }

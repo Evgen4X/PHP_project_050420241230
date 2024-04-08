@@ -34,9 +34,17 @@ form {
 }
 
 #error,
-#error a {
+#error a,
+#error-desc {
 	font-size: larger;
 	color: red;
+}
+
+#show-password{
+	width: 1.5em;
+	height: 1.5em;
+	background-image: url("eye.jpg");
+	background-size: contain;
 }
 
 form > span {

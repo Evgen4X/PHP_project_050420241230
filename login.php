@@ -11,7 +11,10 @@
         <form action="logger.php" method="post">
             <span>Zaloguj się</span>
             <input type="text" id="login" name="login" placeholder="login" requied>
-            <input type="password" id="password" name="password" placeholder="hasło" requied>
+            <div id="password-div" style="display: flex; justify-content: center; align-items: center; flex-direction: row;">
+                <input type="password" id="password" name="password" placeholder="hasło" requied>
+                <div id="show-password" onclick="togglePassword();"></div>
+            </div>
             <div id="error">
                 <?php
                     if(isset($_GET['err'])){
@@ -19,7 +22,7 @@
                             case 1:
                                 echo "Nie udało się połączyć z serwerem. Spróbuj później";
                                 break;
-                            case 3:
+                            case 2:
                                 echo "Wystąpił problem z bazą danych. Zgłoś to <a href='report.php'>tutaj</a>";
                                 break;
                             case 3:
@@ -29,9 +32,24 @@
                     }
                 ?>
             </div>
+            <div id="error-desc">
+                <?php
+                    if(isset($_GET['errdesc'])){
+                        echo 'Błąd '.$_GET['errdesc'];
+                    }
+                ?>
+            </div>
             <input type="submit">
             <a href="register.php">Utwórz konto</a>
         </form>
     </div>
+
+    <script>
+        const password = document.getElementById("show-password");
+        function togglePassword(){
+            document.getElementById("password").setAttribute("type", document.getElementById("password").getAttribute("type") == "password" ? "text" : "password");
+            // document.getElementById("password").value = document.getElementById("password").value;
+        }
+    </script>
 </body>
 </html>
