@@ -15,7 +15,7 @@ function encode($text){
 
 $id = mysqli_connect("localhost", "root", "", "ksiegarnia");
 if(!$id){
-    header("Location: login.php?err=1&errdesc=".mysqli_error($id));
+    header("Location: login.php?err=1&errdesc=".mysqli_connect_error());
     exit;
 }
 
