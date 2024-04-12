@@ -7,6 +7,7 @@
     <title>Logowanie</title>
 </head>
 <body>
+    <canvas width="" height=""></canvas>
     <div id="form">
         <form action="logger.php" method="post">
             <span>Zaloguj się</span>
@@ -20,10 +21,10 @@
                     if(isset($_GET['err'])){
                         switch($_GET['err']){
                             case 1:
-                                echo "Nie udało się połączyć z serwerem. Spróbuj później";
+                                echo "Nie udało się połączyć z serwerem. Spróbuj później lub zgłoś to <a href='report.php/?errcode=".(isset($_GET['errcode']) ? $_GET['errcode'] : null)."&errdesc=".(isset($_GET['errdesc']) ? $_GET['errdesc'] : null)."'>tutaj</a>";
                                 break;
                             case 2:
-                                echo "Wystąpił problem z bazą danych. Zgłoś to <a href='report.php'>tutaj</a>";
+                                echo "Wystąpił problem z bazą danych. Zgłoś to <a href='report.php/?errcode=".(isset($_GET['errcode']) ? $_GET['errcode'] : null)."&errdesc=".(isset($_GET['errdesc']) ? $_GET['errdesc'] : null)."'>tutaj</a>";
                                 break;
                             case 3:
                                 echo "Niepoprawny login lub hasło";
@@ -46,29 +47,49 @@
 
     <script>
         function gen(){
-    let b = [Math.floor(Math.random() * CWidth), Math.floor(Math.random() * CHeight)];
-    let n = bubbles.length;
-    bubbles.push(b);
-    setTimeout(() => {
-        bubbles.splice(n, 1);
-    }, Math.floor(Math.random() * 10000));
-}
+            let b = [Math.floor(Math.random() * CWidth), Math.floor(Math.random() * CHeight), Math.random() * 2 - 1, Math.random() * 2 - 1, Math.floor(Math.random() * 4 + 1)];
+            let n = bubbles.length;
+            bubbles.push(b);
+            console.log(bubbles);
+            setTimeout(() => {
+                bubbles.splice(n, 1);
+            }, Math.floor(Math.random() * 10000));
+            setTimeout(gen, Math.floor(Math.random() * 5000));
+        }
 
-function anim(){
-    
-} 
+        function anim(){
+            ctx.fillStyle = "black";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "white";
+            bubbles.forEach(bubble => {
+                bubble[0] += bubble[2];
+                bubble[1] += bubble[3];
+                if(Math.random() < 0.05){
+                    bubble[2] = Math.random() * 2 - 1;
+                    bubble[3] = Math.random() * 2 - 1;
+                }
+                ctx.beginPath();
+                ctx.arc(bubble[0], bubble[1], bubble[4], 0, 360);
+                ctx.fill();
+            });
+        }
 
-const canvas = document.querySelector('canvas');
+        const canvas = document.querySelector('canvas');
 
-const ctx = canvas.getContext('2d');
+        const CWidth = window.innerWidth;
+        const CHeight = window.innerHeight;
 
-const CWidth = window.innerWidth;
-const CHeight = window.innerHeight;
-var bubbles = [];
+        canvas.setAttribute("width", CWidth);
+        canvas.setAttribute("height", CHeight);
 
-for(let i = 0; ++i < 100; gen);
+        const ctx = canvas.getContext('2d');
 
-setInterval(gen, 5000);
+        var bubbles = [];
+
+        for(let i = 0; ++i < 200; gen());
+
+        setTimeout(gen, Math.floor(Math.random() * 5000));
+        setInterval((anim), 40);
   
         const password = document.getElementById("show-password");
         function togglePassword(){

@@ -13,16 +13,22 @@ function encode($text){
     return $res;
 }
 
-$id = mysqli_connect("localhost", "root", "", "ksiegarnia");
-if(!$id){
-    header("Location: login.php?err=1&errdesc=".mysqli_connect_error());
+try{
+    $id = mysqli_connect("localhost", "root", "", "ksiegarniaa");
+}
+catch(Exception $ex)
+{
+    $a = true;
+}
+if(!$id || $a){
+    header("Location: login.php?err=1&errcode=".mysqli_connect_errno()."&errdesc=".mysqli_connect_error());
     exit;
 }
 
 $res = mysqli_query($id, "select login, haslo, id_klienta from klient;");
 
 if(!$res){
-    header("Location: login.php?err=2&errdesc=".mysqli_error($id));
+    header("Location: login.php?err=2&errcode=".mysqli_errno($id)."&errdesc=".mysqli_error($id));
     exit;
 }
 

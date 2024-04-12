@@ -15,9 +15,14 @@ div#form {
 	align-items: center;
 }
 
+canvas{
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+}
+
 div#form {
-	background-image: url("login-background.jpg");
-	background-size: 100vw 100vh;
+	background: none;
 }
 
 form {

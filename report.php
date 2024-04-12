@@ -10,7 +10,8 @@
     <div id="form">
         <form action="reporter.php" method="post">
             <span>Zgłoś problem</span>
-            <textarea name="description"></textarea>
+            <textarea name="description"><?php echo (isset($_GET['errcode']) ? "Problem id: ".$_GET['errcode'] : '');?>
+            <?php echo (isset($_GET['errdesc']) ? "Problem description: ".$_GET['errdesc'] : '');?></textarea>
             <div id="error">
                 <?php
                     if(isset($_GET['err'])){
@@ -18,7 +19,7 @@
                             case 1:
                                 echo "Nie udało się połączyć z serwerem. Spróbuj później";
                                 break;
-                            case 3:
+                            case 2:
                                 echo "Wystąpił problem z bazą danych. Nie możesz tego nawet zgłosić...";
                                 break;
                         }
@@ -26,7 +27,6 @@
                 ?>
             </div>
             <input type="submit">
-            <a href="register.php">Zgłoś</a>
         </form>
     </div>
 </body>
