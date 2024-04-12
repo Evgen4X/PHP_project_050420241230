@@ -45,6 +45,31 @@
     </div>
 
     <script>
+        function gen(){
+    let b = [Math.floor(Math.random() * CWidth), Math.floor(Math.random() * CHeight)];
+    let n = bubbles.length;
+    bubbles.push(b);
+    setTimeout(() => {
+        bubbles.splice(n, 1);
+    }, Math.floor(Math.random() * 10000));
+}
+
+function anim(){
+    
+} 
+
+const canvas = document.querySelector('canvas');
+
+const ctx = canvas.getContext('2d');
+
+const CWidth = window.innerWidth;
+const CHeight = window.innerHeight;
+var bubbles = [];
+
+for(let i = 0; ++i < 100; gen);
+
+setInterval(gen, 5000);
+  
         const password = document.getElementById("show-password");
         function togglePassword(){
             document.getElementById("password").setAttribute("type", document.getElementById("password").getAttribute("type") == "password" ? "text" : "password");
