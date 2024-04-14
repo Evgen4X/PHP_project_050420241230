@@ -3,6 +3,7 @@ html,
 body {
 	margin: 0;
 	padding: 0;
+	overflow-x: hidden;
 }
 
 body {
@@ -11,8 +12,6 @@ body {
 }
 
 nav {
-	position: absolute;
-	top: 0;
 	width: 100vw;
 	height: 5vh;
 	background-color: #2f2f2f;
@@ -45,13 +44,59 @@ nav div a:visited {
 	color: white;
 }
 
+main {
+	margin-top: -3vh;
+	min-height: 85vh;
+	padding: 0 2vh 2vh 2vh;
+}
+
+main div#main {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+#main > div {
+	height: 33vh;
+	width: 15vw;
+}
+
+#main > div .autor::before {
+	content: "Autor: ";
+}
+
+#main > div .cena::before {
+	content: "Cena: ";
+}
+
+#main > div .cena::after {
+	content: "zł";
+}
+
+select {
+	background-color: #cacaca;
+}
+
+select option:checked {
+	background-color: #8f8f8f;
+}
+
 footer {
-	position: absolute;
 	width: 100vw;
 	height: 10vh;
-	bottom: 0;
 	text-align: center;
 	background-color: #2f2f2f;
 	font-size: x-large;
 	color: #ebebeb;
+}
+
+footer a {
+	color: #efefef;
+	text-decoration: none;
+	font-weight: 600;
+}
+
+footer a:visited {
+	color: #8f8f8f;
 }
