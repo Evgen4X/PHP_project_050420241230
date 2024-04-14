@@ -18,6 +18,31 @@ nav {
 	background-color: #2f2f2f;
 	color: #ebebeb;
 	font-size: larger;
+	display: flex;
+	justify-content: start;
+	align-items: start;
+}
+
+nav div {
+	border-width: 0 0.5em;
+	border-color: #2f2f2f;
+	border-style: solid;
+	height: 100%;
+	color: white;
+}
+
+nav div:hover {
+	background-color: #e07a5f;
+	border-color: #e07a5f;
+}
+
+nav div a {
+	color: white;
+	text-decoration: none;
+}
+
+nav div a:visited {
+	color: white;
 }
 
 footer {

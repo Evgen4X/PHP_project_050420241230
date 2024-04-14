@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="icon" href="icon.png">
     <link rel="stylesheet" href="login.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,11 +12,13 @@
     <div id="form">
         <form action="logger.php" method="post">
             <span>Zaloguj się</span>
-            <input type="text" id="login" name="login" placeholder="login" requied>
-            <div id="password-div" style="display: flex; justify-content: center; align-items: center; flex-direction: row;">
-                <input type="password" id="password" name="password" placeholder="hasło" requied>
-                <div id="show-password" onclick="togglePassword();"></div>
-            </div>
+            <?php
+            echo "<input type='text' id='login' name='login' placeholder='login' value='".(isset($_GET['login']) ? $_GET['login'] : '')."' requied>
+                <div id='password-div' style='display: flex; justify-content: center; align-items: center; flex-direction: row;'>
+                    <input type='password' id='password' name='password' placeholder='hasło' value='".(isset($_GET['password']) ? $_GET['password'] : '')."' requied>
+                    <div id='show-password' onclick='togglePassword();'></div>
+                </div>";
+            ?>
             <div id="error">
                 <?php
                     if(isset($_GET['err'])){
@@ -50,7 +53,6 @@
             let b = [Math.floor(Math.random() * CWidth), Math.floor(Math.random() * CHeight), Math.random() * 2 - 1, Math.random() * 2 - 1, Math.floor(Math.random() * 4 + 1)];
             let n = bubbles.length;
             bubbles.push(b);
-            console.log(bubbles);
             setTimeout(() => {
                 bubbles.splice(n, 1);
             }, Math.floor(Math.random() * 10000));
