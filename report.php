@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <link rel="icon" href="icon.png">
     <link rel="stylesheet" href="login.css">

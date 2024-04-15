@@ -57,7 +57,7 @@ main div#main {
 	flex-wrap: wrap;
 }
 
-#main > div {
+#main > .ksiazka {
 	height: 33vh;
 	width: 15vw;
 }
@@ -72,6 +72,22 @@ main div#main {
 
 #main > div .cena::after {
 	content: "zł";
+}
+
+#main > div .gatunek::before{
+	content: "Gatunek: ";
+}
+
+#main > div .jezyk::before{
+	content: "Jezyk: ";
+}
+
+#main > div .rok::before{
+	content: "Wydano w ";
+}
+
+#main > div .rok::after{
+	content: " r.";
 }
 
 select {
@@ -99,4 +115,21 @@ footer a {
 
 footer a:visited {
 	color: #8f8f8f;
+}
+
+input[type="submit"], .div-submit {
+	text-decoration: none;
+	color: black;
+	border: 2px outset black;
+	background-color: #afafaf;
+	outline: none;
+	transition: all 500ms ease-in-out;
+}
+
+input[type="submit"]:hover, .div-submit:hover {
+	background-color: #8f8f8f;
+}
+
+input[type="submit"]:active, .div-submit:active {
+	background-color: #5f5f5f;
 }

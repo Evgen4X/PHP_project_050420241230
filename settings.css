@@ -17,17 +17,3 @@ td div {
 	justify-content: start;
 	align-items: start;
 }
-
-input[type="submit"] {
-	background-color: #afafaf;
-	outline: none;
-	transition: all 500ms ease-in-out;
-}
-
-input[type="submit"]:hover {
-	background-color: #8f8f8f;
-}
-
-input[type="submit"]:active {
-	background-color: #5f5f5f;
-}

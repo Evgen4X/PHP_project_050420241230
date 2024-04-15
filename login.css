@@ -100,28 +100,3 @@ input[type="password"]::placeholder {
 :root {
 	--button-border-angle: 90deg;
 }
-
-input[type="submit"] {
-	width: 20%;
-	color: #ebebeb;
-	background-color: transparent;
-	outline: none;
-	padding: 0.35em;
-	border: 0.15rem solid #aef6c7;
-	transition: all 500ms ease-out;
-}
-
-input[type="submit"]:hover {
-	width: 25%;
-	background-color: rgba(255, 255, 255, 0.2);
-}
-
-input[type="submit"]:active {
-	background-color: rgba(255, 255, 255, 0.05);
-}
-
-@keyframes borderRotate {
-	100% {
-		--button-border-angle: 420deg;
-	}
-}

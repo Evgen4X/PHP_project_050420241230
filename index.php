@@ -14,21 +14,31 @@
         (isset($_GET['uid']) ? "<div><a href='settings.php?uid=".$_GET['uid']."'>Ustawienia</a></div>" : "")
         ."</nav>";
 
+    echo "<aside>
+            <form action='index.php'
+        </aside>";
+
     echo "<main><div id='main'>";
 
     $id = mysqli_connect("localhost", "root", "", "ksiegarnia");
 
     for($i = 1; $i < 100; ++$i){
-        $book = mysqli_query($id, "select ksiazki.tytul, concat(substr(autor.imie, 1, 1), '. ', autor.nazwisko), ksiazki.cena,  ksiazki.gatunek, ksiazki.jezyk_ksiazki, ksiazki.rok_wydania from ksiazki join autor using (id_autora) limit $i, 1;");
+        $book = mysqli_query($id, "select ksiazki.tytul, concat(substr(autor.imie, 1, 1), '. ', autor.nazwisko), ksiazki.cena,  ksiazki.gatunek, ksiazki.jezyk_ksiazki, ksiazki.rok_wydania, ksiazki.id_ksiazki from ksiazki join autor using (id_autora) limit $i, 1;");
         if($book){
             $data = mysqli_fetch_row($book);
             echo "<div class='ksiazka'>
-                    <h2>".$data[0]."</h2>
-                    <div class='autor'>".$data[1]."</div>
-                    <div class='cena'>".$data[2]."</div>
-                    <div class='gatunek'>".$data[3]."</div>
-                    <div class='jezyk'>".$data[4]."</div>
-                    <div class='rok'>".$data[5]."</div>
+                    <form action='order.php' method='post'>
+                        <h2>".$data[0]."</h2>
+                        <div class='autor'>".$data[1]."</div>
+                        <div class='cena'>".$data[2]."</div>
+                        <div class='gatunek'>".$data[3]."</div>
+                        <div class='jezyk'>".$data[4]."</div>
+                        <div class='rok'>".$data[5]."</div>
+                        <input type='hidden' name='data' value=".$data[6].">
+                        ".(isset($_GET['uid']) ? "
+                        <input type='hidden' name='uid' value='".$_GET['uid']."'>
+                        <input type='submit' class='kup' value='kup'>" : "<a href='login.php' class='div-submit'>kup</a>")."
+                    </form>
                 </div>"; //TODO
         }
     }
