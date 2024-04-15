@@ -25,7 +25,7 @@
         $telefon = $data[8] ? "'".$data[8]."'" : "''";
         $adres_e_mail = $data[9] ? "'".$data[9]."'" : "''";
 
-        echo "<nav><a id='main' href='index.php?uid=".$_GET['uid']."'><div></div></a>";
+        echo "<nav>";
 
         echo "Witaj, ".($imie ? substr($imie, 1, strlen($imie) - 2) : '').'!';
         echo "
