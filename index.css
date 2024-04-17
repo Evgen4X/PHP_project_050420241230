@@ -47,7 +47,7 @@ nav div a:visited {
 main {
 	margin-top: -3vh;
 	min-height: 85vh;
-	padding: 0 2vh 2vh 2vh;
+	padding: 3vh;
 }
 
 main div#main {
@@ -62,31 +62,31 @@ main div#main {
 	width: 15vw;
 }
 
-#main > div .autor::before {
+.autor::before {
 	content: "Autor: ";
 }
 
-#main > div .cena::before {
+.cena::before {
 	content: "Cena: ";
 }
 
-#main > div .cena::after {
+.cena::after {
 	content: "zł";
 }
 
-#main > div .gatunek::before{
+.gatunek::before{
 	content: "Gatunek: ";
 }
 
-#main > div .jezyk::before{
+.jezyk::before{
 	content: "Jezyk: ";
 }
 
-#main > div .rok::before{
+.rok::before{
 	content: "Wydano w ";
 }
 
-#main > div .rok::after{
+.rok::after{
 	content: " r.";
 }
 
