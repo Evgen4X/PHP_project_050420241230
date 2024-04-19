@@ -13,6 +13,8 @@
         <form action="logger.php" method="post">
             <span>Zaloguj się</span>
             <?php
+            session_start();
+            session_destroy();
             echo "<input type='text' id='login' name='login' placeholder='login' value='".(isset($_GET['login']) ? $_GET['login'] : '')."' requied>
                 <div id='password-div' style='display: flex; justify-content: center; align-items: center; flex-direction: row;'>
                     <input type='password' id='password' name='password' placeholder='hasło' value='".(isset($_GET['password']) ? $_GET['password'] : '')."' requied>
@@ -66,17 +68,40 @@
             bubbles.forEach(bubble => {
                 bubble[0] += bubble[2];
                 bubble[1] += bubble[3];
-                if(Math.random() < 0.05){
-                    bubble[2] = Math.random() * 2 - 1;
-                    bubble[3] = Math.random() * 2 - 1;
+                if(bubble[0] < -20 || bubble[0] > CWidth + 20){
+                    bubble[0] = Math.floor(Math.random() * CWidth);
+                    bubble[1] = Math.floor(Math.random() * CHeight);
                 }
+                if(bubble[1] < -20 || bubble[1] > CHeight + 20){
+                    bubble[0] = Math.floor(Math.random() * CWidth);
+                    bubble[1] = Math.floor(Math.random() * CHeight);
+                }
+                if(Math.random() < 0.05){
+                    bubble[2] += Math.random() * 2 - 1;
+                    bubble[3] += Math.random() * 2 - 1;
+                }
+                if(bubble[2] > 10){bubble[2] = 0;}
+                if(bubble[3] > 10){bubble[3] = 0;}
                 ctx.beginPath();
                 ctx.arc(bubble[0], bubble[1], bubble[4], 0, 360);
                 ctx.fill();
             });
         }
 
+        function canvasClicked(event){
+            let x = event.clientX;
+            let y = event.clientY;
+            bubbles.forEach(bubble => {
+                if(Math.sqrt(Math.pow(bubble[0] - x, 2) + Math.pow(bubble[1] - y, 2)) < 200){
+                    bubble[2] = (x - bubble[0]) / 20;
+                    bubble[3] = (y - bubble[1]) / 20;
+                }
+            });
+        }
+
         const canvas = document.querySelector('canvas');
+        document.querySelectorAll('*').forEach(idk => {idk.onmousemove = canvasClicked;});
+
 
         const CWidth = window.innerWidth;
         const CHeight = window.innerHeight;
@@ -91,7 +116,7 @@
         for(let i = 0; ++i < 200; gen());
 
         setTimeout(gen, Math.floor(Math.random() * 5000));
-        setInterval((anim), 40);
+        setInterval((anim), 20);
   
         const password = document.getElementById("show-password");
         function togglePassword(){

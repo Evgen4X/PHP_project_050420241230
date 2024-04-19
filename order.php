@@ -49,7 +49,7 @@
 
     if(isset($_POST['err'])){
         if($_POST['err'] == 1){
-            echo "<div id='errno'>" //TODO
+            echo "<div id='errno'>"; //TODO
 
         }
     }

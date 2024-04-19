@@ -9,18 +9,14 @@
 </head>
 <body>
     <?php
+    $id = mysqli_connect("localhost", "root", "", "ksiegarnia");
     echo "<nav>
         <div><a href='login.php'>Log in</a></div>".
-        (isset($_GET['uid']) ? "<div><a href='settings.php?uid=".$_GET['uid']."'>Ustawienia</a></div>" : "")
-        ."</nav>";
-
-    echo "<aside>
-            <form action='index.php'
-        </aside>";
+        (isset($_GET['uid']) ? "<div><a href='settings.php?uid=".$_GET['uid']."'>Ustawienia</a></div>" : "").
+        (mysqli_query()).
+        "</nav>";
 
     echo "<main><div id='main'>";
-
-    $id = mysqli_connect("localhost", "root", "", "ksiegarnia");
 
     for($i = 1; $i < 100; ++$i){
         $book = mysqli_query($id, "select ksiazki.tytul, concat(substr(autor.imie, 1, 1), '. ', autor.nazwisko), ksiazki.cena,  ksiazki.gatunek, ksiazki.jezyk_ksiazki, ksiazki.rok_wydania, ksiazki.id_ksiazki from ksiazki join autor using (id_autora) limit $i, 1;");
