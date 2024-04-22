@@ -13,20 +13,20 @@
         <form action="registrator.php" method="post">
             <span>Załóż konto</span>
             <?php
-            echo "<input type='mail' id='email' name='adres_e_mail' placeholder='e-mail' value='".(isset($_GET["email"]) ? $_GET['email'] : '')."' requied>";
-            echo "<input type='text' id='login' name='login' placeholder='login' value='".(isset($_GET['login']) ? $_GET['login'] : '')."' requied>";
+            echo "<input type='mail' id='email' name='adres_e_mail' placeholder='e-mail' value='".(isset($_SESSION["email"]) ? $_SESSION['email'] : '')."' requied>";
+            echo "<input type='text' id='login' name='login' placeholder='login' value='".(isset($_SESSION['login']) ? $_SESSION['login'] : '')."' requied>";
             echo "<div id='password-div' style='display: flex; justify-content: center; align-items: center; flex-direction: row;'>
-                <input type='password' id='password' name='password' placeholder='hasło' value='".(isset($_GET['password']) ? $_GET['password'] : '')."' requied>
+                <input type='password' id='password' name='password' placeholder='hasło' value='".(isset($_SESSION['password']) ? $_SESSION['password'] : '')."' requied>
                 <div id='show-password' onclick='togglePassword();'></div>
             </div>";
-            echo "<input type='tel' id='tel' name='telefon' placeholder='telefon' value='".(isset($_GET['tel']) ? $_GET['tel'] : '')."' requied>";
+            echo "<input type='tel' id='tel' name='telefon' placeholder='telefon' value='".(isset($_SESSION['tel']) ? $_SESSION['tel'] : '')."' requied>";
             ?>
             <div id="error">
                 <?php
-                    if(isset($_GET['err'])){
-                        switch($_GET['err']){
+                    if(isset($_SESSION['err'])){
+                        switch($_SESSION['err']){
                             case 1:
-                                echo "Nie udało się połaczyć z serwerem. Spróbuj później albo zgłoś to <a href='report.php/?errcode=".(isset($_GET['errcode']) ? $_GET['errcode'] : null)."&errdesc=".(isset($_GET['errdesc']) ? $_GET['errdesc'] : null)."'>tutaj</a>";
+                                echo "Nie udało się połaczyć z serwerem. Spróbuj później albo zgłoś to <a href='report.php/?errcode=".(isset($_SESSION['errcode']) ? $_SESSION['errcode'] : null)."&errdesc=".(isset($_SESSION['errdesc']) ? $_SESSION['errdesc'] : null)."'>tutaj</a>";
                                 break;
                             case 2:
                                 echo "Login jest zajęty. Wymyśl inny";
@@ -38,7 +38,7 @@
                                 echo "Na ten adres e-mail już jest założone konto";
                                 break;
                             case 5:
-                                echo "Nie udało się utworzyć konto. Spróbuj później. Zgłoś to <a href='report.php/?errcode=".(isset($_GET['errcode']) ? $_GET['errcode'] : null)."&errdesc=".(isset($_GET['errdesc']) ? $_GET['errdesc'] : null)."'>tutaj</a>";
+                                echo "Nie udało się utworzyć konto. Spróbuj później. Zgłoś to <a href='report.php/?errcode=".(isset($_SESSION['errcode']) ? $_SESSION['errcode'] : null)."&errdesc=".(isset($_SESSION['errdesc']) ? $_SESSION['errdesc'] : null)."'>tutaj</a>";
                                 break;
                             case 6:
                                 echo "Hasło ma mieć przynajmniej 8 znaków. W tym: <br><ul>
@@ -66,8 +66,8 @@
             </div>
             <div id="error-desc">
                 <?php
-                    if(isset($_GET['errdesc'])){
-                        echo 'Błąd '.$_GET['errdesc'];
+                    if(isset($_SESSION['errdesc'])){
+                        echo 'Błąd '.$_SESSION['errdesc'];
                     }
                 ?>
             </div>
@@ -83,7 +83,6 @@
             setTimeout(() => {
                 bubbles.splice(n, 1);
             }, Math.floor(Math.random() * 10000));
-            setTimeout(gen, Math.floor(Math.random() * 5000));
         }
 
         function anim(){
@@ -117,7 +116,7 @@
 
         for(let i = 0; ++i < 200; gen());
 
-        setTimeout(gen, Math.floor(Math.random() * 5000));
+        setInterval(gen, 100);
         setInterval((anim), 40);
 
         const password = document.getElementById("show-password");

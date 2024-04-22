@@ -13,7 +13,7 @@
         include("cipher.php");
 
         $id = mysqli_connect("localhost", "root", "", "ksiegarnia");
-        $data = mysqli_fetch_row(mysqli_query($id, "select imie, nazwisko, data_urodzenia, plec, kod_pocztowy, miejscowosc, ulica, nr_domu, telefon, adres_e_mail from klient where id_klienta = ".decode($_GET['uid']).";"));
+        $data = mysqli_fetch_row(mysqli_query($id, "select imie, nazwisko, data_urodzenia, plec, kod_pocztowy, miejscowosc, ulica, nr_domu, telefon, adres_e_mail from klient where id_klienta = ".decode($_SESSION['uid']).";"));
         $imie = $data[0] ? "'".$data[0]."'" : "''";
         $nazwisko = $data[1] ? "'".$data[1]."'" : "''";
         $data_urodzenia = $data[2] ? "'".$data[2]."'" : "''";
@@ -30,13 +30,13 @@
         echo "Witaj, ".($imie ? substr($imie, 1, strlen($imie) - 2) : '').'!';
         echo "
             <div onclick='window.location.href = window.location.href.replace(\"settings\", \"index\");'>Wróć</div>
-            <div id='setting-konto' onclick=\"toggle('Konto', $imie, $nazwisko, $data_urodzenia, $plec, $kod_pocztowy, $miejscowosc, $ulica, $nr_domu, $telefon, $adres_e_mail, ".decode($_GET['uid']).");\">Konto</div>
-            <div id='setting-preferencje' onclick=\"toggle('Preferencje', ".decode($_GET['uid']).");\">Preferencje</div>
+            <div id='setting-konto' onclick=\"toggle('Konto', $imie, $nazwisko, $data_urodzenia, $plec, $kod_pocztowy, $miejscowosc, $ulica, $nr_domu, $telefon, $adres_e_mail, ".decode($_SESSION['uid']).");\">Konto</div>
+            <div id='setting-preferencje' onclick=\"toggle('Preferencje', ".decode($_SESSION['uid']).");\">Preferencje</div>
         </nav>"; 
 
         echo "<main></main><footer>Created by <a href='github.com/Evgen4X'>Evgen4X</a></footer>";
 
-        echo "<script> setTimeout(() => {toggle('Konto', ".decode($_GET['uid']).", $imie, $nazwisko, $data_urodzenia, $plec, $kod_pocztowy, $miejscowosc, $ulica, $nr_domu, $telefon, $adres_e_mail)}, 200);</script>";
+        echo "<script> setTimeout(() => {toggle('Konto', ".decode($_SESSION['uid']).", $imie, $nazwisko, $data_urodzenia, $plec, $kod_pocztowy, $miejscowosc, $ulica, $nr_domu, $telefon, $adres_e_mail)}, 200);</script>";
     ?>
 
     <script>

@@ -9,14 +9,17 @@
 </head>
 <body>
     <?php
+    if(session_status() == PHP_SESSION_NONE){
+        session_start();
+    }
     $id = mysqli_connect("localhost", "root", "", "ksiegarnia");
-    echo "<nav>
-        <div><a href='login.php'>Log in</a></div>".
-        (isset($_GET['uid']) ? "<div><a href='settings.php?uid=".$_GET['uid']."'>Ustawienia</a></div>" : "").
-        (mysqli_query()).
+    echo "<nav>".
+        (isset($_SESSION['uid']) ? "<div><a href='logout.php'>Log out</a></div>" : "<div><a href='login.php'>Log in</a></div>").
+        (isset($_SESSION['uid']) ? "<div><a href='settings.php'>Ustawienia</a></div>" : "").
         "</nav>";
 
     echo "<main><div id='main'>";
+
 
     for($i = 1; $i < 100; ++$i){
         $book = mysqli_query($id, "select ksiazki.tytul, concat(substr(autor.imie, 1, 1), '. ', autor.nazwisko), ksiazki.cena,  ksiazki.gatunek, ksiazki.jezyk_ksiazki, ksiazki.rok_wydania, ksiazki.id_ksiazki from ksiazki join autor using (id_autora) limit $i, 1;");
@@ -31,8 +34,8 @@
                         <div class='jezyk'>".$data[4]."</div>
                         <div class='rok'>".$data[5]."</div>
                         <input type='hidden' name='data' value=".$data[6].">
-                        ".(isset($_GET['uid']) ? "
-                        <input type='hidden' name='uid' value='".$_GET['uid']."'>
+                        ".(isset($_SESSION['uid']) ? "
+                        <input type='hidden' name='uid' value='".$_SESSION['uid']."'>
                         <input type='submit' class='kup' value='kup'>" : "<a href='login.php' class='div-submit'>kup</a>")."
                     </form>
                 </div>"; //TODO
