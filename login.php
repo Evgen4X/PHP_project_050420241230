@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,6 +20,7 @@
                 <div id='password-div' style='display: flex; justify-content: center; align-items: center; flex-direction: row;'>
                     <input type='password' id='password' name='password' placeholder='hasło' value='".(isset($_SESSION['password']) ? $_SESSION['password'] : '')."' requied>
                     <div id='show-password' onclick='togglePassword();'></div>
+                    <input type='hidden' name='start' id='start'>
                 </div>";
             ?>
             <div id="error">
@@ -43,10 +47,12 @@
                     }
                 ?>
             </div>
-            <input type="submit">
+            <input type="submit" class='div-submit' value='zaloguj sie'>
             <a href="register.php">Utwórz konto</a>
         </form>
     </div>
+
+    <?php echo "<script>document.getElementById('start').value = ".time()."</script>"; ?>
 
     <script>
         function gen(){
@@ -68,10 +74,14 @@
                 if(bubble[0] < -20 || bubble[0] > CWidth + 20){
                     bubble[0] = Math.floor(Math.random() * CWidth);
                     bubble[1] = Math.floor(Math.random() * CHeight);
+                    bubble[2] *= Math.random() - 0.5;
+                    bubble[3] *= Math.random() - 0.5;
                 }
                 if(bubble[1] < -20 || bubble[1] > CHeight + 20){
                     bubble[0] = Math.floor(Math.random() * CWidth);
                     bubble[1] = Math.floor(Math.random() * CHeight);
+                    bubble[2] *= Math.random() - 0.5;
+                    bubble[3] *= Math.random() - 0.5;
                 }
                 if(Math.random() < 0.05){
                     bubble[2] += Math.random() * 2 - 1;
@@ -99,7 +109,6 @@
         const canvas = document.querySelector('canvas');
         document.querySelectorAll('*').forEach(idk => {idk.onmousemove = canvasClicked;});
 
-
         const CWidth = window.innerWidth;
         const CHeight = window.innerHeight;
 
@@ -112,13 +121,23 @@
 
         for(let i = 0; ++i < 200; gen());
 
-        setInterval(gen, 100);
+        setInterval(gen, 75);
         setInterval(anim, 10);
   
         const password = document.getElementById("show-password");
         function togglePassword(){
             document.getElementById("password").setAttribute("type", document.getElementById("password").getAttribute("type") == "password" ? "text" : "password");
-            // document.getElementById("password").value = document.getElementById("password").value;
+            if(document.getElementbyId('password').getAttribute('type') == 'text'){
+                password.animate([
+                    {filter: 'brightness(200%)'},
+                    {filter: 'brightness(100%)'}
+                ], {duration: 750});
+            }
+            setTimeout(() => {
+                if(document.getElementById("password").getAttribute("type") == "text"){
+                    togglePassword();
+                }
+            }, 750);
         }
     </script>
 </body>

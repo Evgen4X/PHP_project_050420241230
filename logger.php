@@ -1,9 +1,21 @@
 <?php
+session_start();
+?>
+
+<?php
 
 include("cipher.php");
 
 $login = str_replace("'", "\\'", $_POST['login']);
 $haslo = str_replace("'", "\\'", $_POST['password']);
+
+if(time() - $_POST['start'] < 7){ //prevents entering log in data too fast (min 7 sec. is requied to pass)
+    $_SESSION['login'] = $login;
+    $_SESSION['password'] = $haslo;
+    $_SESSION['err'] = 3;
+    header("Location: login.php");
+    exit;
+}
 
 $id = mysqli_connect("localhost", "root", "", "ksiegarnia");
 if(!$id){

@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -75,6 +78,7 @@
             <a href="login.php">Już masz konto?</a>
         </form>
     </div>
+
     <script>
         function gen(){
             let b = [Math.floor(Math.random() * CWidth), Math.floor(Math.random() * CHeight), Math.random() * 2 - 1, Math.random() * 2 - 1, Math.floor(Math.random() * 4 + 1)];
@@ -92,17 +96,43 @@
             bubbles.forEach(bubble => {
                 bubble[0] += bubble[2];
                 bubble[1] += bubble[3];
-                if(Math.random() < 0.05){
-                    bubble[2] = Math.random() * 2 - 1;
-                    bubble[3] = Math.random() * 2 - 1;
+                if(bubble[0] < -20 || bubble[0] > CWidth + 20){
+                    bubble[0] = Math.floor(Math.random() * CWidth);
+                    bubble[1] = Math.floor(Math.random() * CHeight);
+                    bubble[2] *= Math.random() - 0.5;
+                    bubble[3] *= Math.random() - 0.5;
                 }
+                if(bubble[1] < -20 || bubble[1] > CHeight + 20){
+                    bubble[0] = Math.floor(Math.random() * CWidth);
+                    bubble[1] = Math.floor(Math.random() * CHeight);
+                    bubble[2] *= Math.random() - 0.5;
+                    bubble[3] *= Math.random() - 0.5;
+                }
+                if(Math.random() < 0.05){
+                    bubble[2] += Math.random() * 2 - 1;
+                    bubble[3] += Math.random() * 2 - 1;
+                }
+                if(bubble[2] > 10){bubble[2] = 0;}
+                if(bubble[3] > 10){bubble[3] = 0;}
                 ctx.beginPath();
                 ctx.arc(bubble[0], bubble[1], bubble[4], 0, 360);
                 ctx.fill();
             });
         }
 
+        function canvasClicked(event){
+            let x = event.clientX;
+            let y = event.clientY;
+            bubbles.forEach(bubble => {
+                if(Math.sqrt(Math.pow(bubble[0] - x, 2) + Math.pow(bubble[1] - y, 2)) < 200){
+                    bubble[2] = (x - bubble[0]) / 20;
+                    bubble[3] = (y - bubble[1]) / 20;
+                }
+            });
+        }
+
         const canvas = document.querySelector('canvas');
+        document.querySelectorAll('*').forEach(idk => {idk.onmousemove = canvasClicked;});
 
         const CWidth = window.innerWidth;
         const CHeight = window.innerHeight;
@@ -116,13 +146,23 @@
 
         for(let i = 0; ++i < 200; gen());
 
-        setInterval(gen, 100);
-        setInterval((anim), 40);
+        setInterval(gen, 75);
+        setInterval(anim, 10);
 
         const password = document.getElementById("show-password");
         function togglePassword(){
             document.getElementById("password").setAttribute("type", document.getElementById("password").getAttribute("type") == "password" ? "text" : "password");
-            // document.getElementById("password").value = document.getElementById("password").value;
+            if(document.getElementbyId('password').getAttribute('type') == 'text'){
+                password.animate([
+                    {filter: 'brightness(200%)'},
+                    {filter: 'brightness(100%)'}
+                ], {duration: 750});
+            }
+            setTimeout(() => {
+                if(document.getElementById("password").getAttribute("type") == "text"){
+                    togglePassword();
+                }
+            }, 750);
         }
     </script>
 </body>

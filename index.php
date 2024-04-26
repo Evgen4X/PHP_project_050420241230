@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -9,9 +12,6 @@
 </head>
 <body>
     <?php
-    if(session_status() == PHP_SESSION_NONE){
-        session_start();
-    }
     $id = mysqli_connect("localhost", "root", "", "ksiegarnia");
     echo "<nav>".
         (isset($_SESSION['uid']) ? "<div><a href='logout.php'>Log out</a></div>" : "<div><a href='login.php'>Log in</a></div>").
@@ -36,9 +36,9 @@
                         <input type='hidden' name='data' value=".$data[6].">
                         ".(isset($_SESSION['uid']) ? "
                         <input type='hidden' name='uid' value='".$_SESSION['uid']."'>
-                        <input type='submit' class='kup' value='kup'>" : "<a href='login.php' class='div-submit'>kup</a>")."
+                        <input type='submit' class='kup' value='kup'>" : "<a href='login.php' style='display: block;' class='div-submit kup'>kup</a>")."
                     </form>
-                </div>"; //TODO
+                </div>";
         }
     }
 

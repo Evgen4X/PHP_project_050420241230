@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -26,7 +29,7 @@
 
     echo "Witaj, ".($imie ? substr($imie, 1, strlen($imie) - 2) : '').'!';
     echo "
-        <div onclick='window.location.href = window.location.href.replace(\"settings\", \"index\");'>Wróć</div>
+        <div onclick='window.location.href = window.location.href.replace(\"order\", \"index\");'>Wróć</div>
     </nav>";
     echo "<main>";
 

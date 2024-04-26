@@ -1,4 +1,7 @@
 <?php
+session_start();
+?>
+<?php
 
 include("cipher.php");
 
@@ -142,6 +145,9 @@ try{
 mysqli_query($id, "commit;");
 
 $_SESSION['uid'] = $USER_ID;
+$_SESSION['errcode'] = null;
+$_SESSION['errdesc'] = null;
+$_SESSION['err'] = null;
 
 header("Location: settings.php");
 exit;
