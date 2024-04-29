@@ -14,10 +14,6 @@ div#form {
 	align-items: center;
 }
 
-#bg{
-	/* display:none; */
-}
-
 canvas{
 	position: absolute;
 	width: 100vw;
@@ -38,7 +34,7 @@ form {
 	border-radius: 10%;
 	box-shadow: 0 0 0.1vw white;
 	background-color: transparent;
-	backdrop-filter: brightness(10%);
+	backdrop-filter: brightness(33%);
 }
 
 #error,
