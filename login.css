@@ -9,10 +9,13 @@ div#form {
 	filter: blur(10%);
 	width: 100vw;
 	height: 100vh;
-	background-color: #ebebeb;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+#bg{
+	/* display:none; */
 }
 
 canvas{
@@ -35,7 +38,7 @@ form {
 	border-radius: 10%;
 	box-shadow: 0 0 0.1vw white;
 	background-color: transparent;
-	backdrop-filter: brightness(15%);
+	backdrop-filter: brightness(10%);
 }
 
 #error,

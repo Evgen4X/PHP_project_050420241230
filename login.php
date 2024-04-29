@@ -65,8 +65,7 @@ session_start();
         }
 
         function anim(){
-            ctx.fillStyle = "black";
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
             ctx.fillStyle = "white";
             bubbles.forEach(bubble => {
                 bubble[0] += bubble[2];
@@ -118,6 +117,8 @@ session_start();
         const ctx = canvas.getContext('2d');
 
         var bubbles = [];
+        const img = new Image(CWidth, CHeight);
+        img.src = 'login-background.jpg';
 
         for(let i = 0; ++i < 200; gen());
 
@@ -127,7 +128,7 @@ session_start();
         const password = document.getElementById("show-password");
         function togglePassword(){
             document.getElementById("password").setAttribute("type", document.getElementById("password").getAttribute("type") == "password" ? "text" : "password");
-            if(document.getElementbyId('password').getAttribute('type') == 'text'){
+            if(document.getElementById('password').getAttribute('type') == 'text'){
                 password.animate([
                     {filter: 'brightness(200%)'},
                     {filter: 'brightness(100%)'}
