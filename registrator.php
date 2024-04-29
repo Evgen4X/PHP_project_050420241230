@@ -20,7 +20,7 @@ if(!$id){
     $_SESSION['errcode'] = mysqli_connect_errno();
     $_SESSION['errdesc'] = mysqli_connect_error();
     header("Location: register.php");
-    exit;
+    die;
 }
 
 $klients = mysqli_query($id, "select * from klient");
@@ -35,7 +35,7 @@ while($k = mysqli_fetch_row($klients)){
         $_SESSION['tel'] = $telefon;
         $_SESSION['err'] = 4;
         header("Location: register.php");
-        exit;
+        die;
     }
     if($k[1] == $login){
         $_SESSION['login'] = $login;
@@ -44,7 +44,7 @@ while($k = mysqli_fetch_row($klients)){
         $_SESSION['tel'] = $telefon;
         $_SESSION['err'] = 2;
         header("Location: register.php");
-        exit;
+        die;
     }
     if($k[2] == $haslo){
         $_SESSION['login'] = $login;
@@ -53,7 +53,7 @@ while($k = mysqli_fetch_row($klients)){
         $_SESSION['tel'] = $telefon;
         $_SESSION['err'] = 3;
         header("Location: register.php");
-        exit;
+        die;
     }
 }
 
@@ -64,7 +64,7 @@ if(!preg_match("/[a-zA-Z0-9\.\-+]+@[a-zA-Z0-9]+\.[a-zA-Z]+/", $email)){
     $_SESSION['tel'] = $telefon;
     $_SESSION['err'] = 7;
     header("Location: register.php");
-    exit;
+    die;
 }
 
 if(!preg_match("/.{6,}/", $login)){
@@ -74,7 +74,7 @@ if(!preg_match("/.{6,}/", $login)){
     $_SESSION['tel'] = $telefon;
     $_SESSION['err'] = 8;
     header("Location: register.php");
-    exit;
+    die;
 }
 
 if(!preg_match("/[0-9]{9,}/", $telefon)){
@@ -84,7 +84,7 @@ if(!preg_match("/[0-9]{9,}/", $telefon)){
     $_SESSION['tel'] = $telefon;
     $_SESSION['err'] = 9;
     header("Location: register.php");
-    exit;
+    die;
 }
 
 if(strlen($haslo) < 8 ||
@@ -99,7 +99,7 @@ if(strlen($haslo) < 8 ||
     $_SESSION['tel'] = $telefon;
     $_SESSION['err'] = 6;
     header("Location: register.php");
-    exit;
+    die;
 }
 
 mysqli_query($id, "start transaction;");
@@ -113,7 +113,7 @@ if(!mysqli_query($id, "insert into klient(login, haslo, telefon, adres_e_mail) v
     $_SESSION['errcode'] = mysqli_errno($id);
     $_SESSION['errdesc'] = mysqli_error($id);
     header("Location: register.php");
-    exit;
+    die;
 }
 
 $USER_ID = mysqli_query($id, "select id_klienta from klient where login = '$login' and haslo = '$haslo' and adres_e_mail = '$email'");
@@ -127,19 +127,7 @@ if(!$USER_ID){
     $_SESSION['tel'] = $telefon;
     $_SESSION['err'] = 5;
     header("Location: register.php");
-    exit;
-}
-
-try{
-    encode($USER_ID);
-} catch(Exception $ex){
-    $_SESSION['login'] = $login;
-    $_SESSION['password'] = $haslo;
-    $_SESSION['email'] = $email;
-    $_SESSION['tel'] = $telefon;
-    $_SESSION['err'] = 5;
-    header("Location: register.php");
-    exit;
+    die;
 }
 
 mysqli_query($id, "commit;");
@@ -150,6 +138,6 @@ $_SESSION['errdesc'] = null;
 $_SESSION['err'] = null;
 
 header("Location: settings.php");
-exit;
+die;
 
 ?>

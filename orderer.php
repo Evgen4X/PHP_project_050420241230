@@ -9,7 +9,7 @@ if(!$id){
     $_SESSION['errdesc'] = mysqli_connect_error();
     $_SESSION['errcode'] = mysqli_connect_errno();
     header('Location: order.php');
-    exit;
+    die;
 }
 
 $res = mysqli_query($id, 'update ksiazki set ilosc = ilosc - '.$_POST['ilosc'].' where id_ksiazki = '.$_POST['kid']);
@@ -18,13 +18,13 @@ if(!$res){
     $_SESSION['errdesc'] = mysqli_error();
     $_SESSION['errcode'] = mysqli_errno();
     header('Location: order.php');
-    exit;
+    die;
 }
 
 $_SESSION['err'] = 0;
 $_SESSION['errdesc'] = null;
 $_SESSION['errcode'] = null;
 header('Location: order.php');
-exit;
+die;
 
 ?>

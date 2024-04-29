@@ -14,7 +14,7 @@ if(time() - $_POST['start'] < 7){ //prevents entering log in data too fast (min 
     $_SESSION['password'] = $haslo;
     $_SESSION['err'] = 3;
     header("Location: login.php");
-    exit;
+    die;
 }
 
 $id = mysqli_connect("localhost", "root", "", "ksiegarnia");
@@ -25,7 +25,7 @@ if(!$id){
     $_SESSION['errcode'] = mysqli_connect_errno();
     $_SESSION['errdesc'] = mysqli_connect_error();
     header("Location: login.php");
-    exit;
+    die;
 }
 
 $res = mysqli_query($id, "select login, haslo, id_klienta from klient;");
@@ -37,7 +37,7 @@ if(!$res){
     $_SESSION['errcode'] = mysqli_errno();
     $_SESSION['errdesc'] = mysqli_error();
     header("Location: login.php");
-    exit;
+    die;
 }
 
 $found = false;
@@ -53,12 +53,12 @@ if(!$found){
     $_SESSION['password'] = $haslo;
     $_SESSION['err'] = 3;
     header("Location: login.php");
-    exit;
+    die;
 }
 
 
 $_SESSION['uid'] = $USER_ID;
 header("Location: index.php");
-exit;
+die;
 
 ?>
