@@ -69,14 +69,30 @@ aside fieldset input[type='number']{
 	width: 4em;
 }
 
-aside fieldset input[type='checkbox']{
-	border: 0 solid black;
-	border-bottom: 1.25em solid #00ff00;
+aside fieldset div.checkbox2{
+	width: 0.25em;
+	height: 0;
+	border-style: solid;
+	border-width: 0.5em;
+	border-color: gray;
 }
 
-aside fieldset input[type='checkbox']:checked{
-	border: 0 solid black;
-	border-top: 1.25em solid #ff0000;
+aside fieldset div.checkbox1{
+	width: 0;
+	height: 0;
+	margin-top: -1em;
+	border-style: solid;
+	border-width: 1em;
+	border-color: transparent transparent green transparent;
+}
+
+aside fieldset div.checkbox0{
+	width: 0;
+	height: 0;
+	margin-top: 1em;
+	border-style: solid;
+	border-width: 1em;
+	border-color: red transparent transparent transparent;
 }
 
 main {
