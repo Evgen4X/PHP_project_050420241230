@@ -44,8 +44,45 @@ nav div a:visited {
 	color: white;
 }
 
+aside{
+	position: absolute;
+	top: 10vh;
+	left: 0;
+	width: 13vw;
+	height: 80vh;
+	padding: 2vw;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	border: 1px solid black;
+}
+
+aside fieldset{
+	width: 12vw;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+aside fieldset input[type='number']{
+	width: 4em;
+}
+
+aside fieldset input[type='checkbox']{
+	border: 0 solid black;
+	border-bottom: 1.25em solid #00ff00;
+}
+
+aside fieldset input[type='checkbox']:checked{
+	border: 0 solid black;
+	border-top: 1.25em solid #ff0000;
+}
+
 main {
+	width: 90vw;
 	margin-top: -3vh;
+	margin-left: 10vw;
 	min-height: 85vh;
 	padding: 3vh;
 }

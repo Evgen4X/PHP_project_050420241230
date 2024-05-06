@@ -43,6 +43,24 @@ session_start();
     }
 
     echo "</div></main>";
+
+    echo "<aside>
+        <h2>Fil</h2>
+        <form action='index.php' method='post'>
+            <fieldset>
+                <legend>Cena</legend>
+                <input type='number' value='0' placeholder='min' name='cena-min' id='cena-min'>
+                <input type='number' value='10000' placeholder='max' name='cena-max' id='cena-max'>
+            </fieldset>
+            <fieldset>
+                <legend>Sortuj</legend>
+                <table>
+                    <tr><td>Cena</td><td><input type='checkbox' name='sortuj-cena'></td></tr>
+                </table>
+            </fieldset>
+            <input type='submit'>
+        </form>
+    </aside>";
       
     echo "<footer>Created by <a href='https://github.com/Evgen4X'>Evgen4X</a></footer>";
 
