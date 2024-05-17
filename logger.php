@@ -4,7 +4,9 @@ session_start();
 
 <?php
 
-include("cipher.php");
+unset($_SESSION['errcode']);
+unset($_SESSION['errdesc']);
+unset($_SESSION['err']);
 
 $login = str_replace("'", "\\'", $_POST['login']);
 $haslo = str_replace("'", "\\'", $_POST['password']);

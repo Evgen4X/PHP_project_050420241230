@@ -17,7 +17,7 @@ session_start();
             <span>Załóż konto</span>
             <?php
             $captchaText = "";
-            for($i = 0; $i++ < 7; $captchaText .= "ABCDEFGHIJKLMNOPQRSTUVWXYZ23456789"[rand(0,33)]);
+            for($i = 0; $i++ < 6; $captchaText .= "abdefghmnqrtABCDEFGHIJKLMNOPQRSTUVWXYZ23456789"[rand(0,45)]);
             echo "<input type='hidden' name='captcha' value='".$captchaText."'>";
             echo "<input type='mail' id='email' name='adres_e_mail' placeholder='e-mail' value='".(isset($_SESSION["email"]) ? $_SESSION['email'] : '')."' requied>";
             echo "<input type='text' id='login' name='login' placeholder='login' value='".(isset($_SESSION['login']) ? $_SESSION['login'] : '')."' requied>";
@@ -30,7 +30,7 @@ session_start();
             ?>
             <div style='display: flex; justify-content: space-evenly; align-items: center; flex-direction: column; height: 7em;'>
                 <canvas id="captcha"></canvas>
-                <input name="captchaEntered">
+                <input name="captchaEntered" placeholder="Wprowadź tekst powyżej">
             </div>
             <div id="error">
                 <?php
@@ -176,25 +176,30 @@ session_start();
         function setCaptcha(text){
             let cvs = document.getElementById('captcha');
             let c = cvs.getContext("2d");
-            cvs.setAttribute('width', CWidth/10);
-            cvs.setAttribute('height', CHeight/20);
+            cvs.setAttribute('width', CWidth / 10);
+            cvs.setAttribute('height', CHeight / 20);
+            let width = CWidth / 10;
+            let height = CHeight / 20;
             let i = 0;
-            let r = Math.floor(Math.random() * 155) + 100;
-            let g = Math.floor(Math.random() * 155) + 100;
-            let b = Math.floor(Math.random() * 155) + 100;
-            while(i < CWidth/10){
-                c.fillStyle = `rgb(${r}, ${g}, ${b})`;
-                c.fillRect(i++, 0, 1, CHeight/20); //TODO: fix
-                r += Math.random() * 10 - 5;
-                g += Math.random() * 10 - 5;
-                b += Math.random() * 10 - 5;
+            let colors = [];
+            for(let i = 0; i < 20; ++i){
+                colors.push(`rgb(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 155) + 100}, ${Math.floor(Math.random() * 155) + 100})`);
             }
-            r -= Math.random() * 100;
-            g -= Math.random() * 100;
-            b -= Math.random() * 100;
-            c.strokeStyle = `rgb(${r}, ${g}, ${b})`;
-            c.font = "3em Arial";
-            c.strokeText(text, 15, CHeight/27, CWidth / 12);
+            for(let j = 0; j < height * 2 / 3; ++j){
+                for(let i = 0; i < width;){
+                    c.fillStyle = colors[(i + j) % 20];
+                    let w = Math.floor(Math.random() * 10);
+                    if(i + w > width){
+                        w = width - i;
+                    }
+                    c.fillRect(i, j * height / 3, w, height / 3);
+                    i += w;
+                }
+            }
+            c.strokeStyle = `rgb(${Math.floor(Math.random() * 50)}, ${Math.floor(Math.random() * 50)}, ${Math.floor(Math.random() * 50)})`;
+            c.lineWidth = '2';
+            c.font = "2.5em Arial";
+            c.strokeText(text, width / 10, height * 0.9, width * 4 / 5);
         }
     </script>
 </body>

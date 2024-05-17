@@ -3,13 +3,17 @@ session_start();
 ?>
 <?php
 
+unset($_SESSION['errcode']);
+unset($_SESSION['errdesc']);
+unset($_SESSION['err']);
+
 if($_POST['captchaEntered'] != $_POST['captcha']){
     $_SESSION['login'] = $login;
     $_SESSION['password'] = $haslo;
     $_SESSION['email'] = $email;
     $_SESSION['tel'] = $telefon;
-    $_SESSION['errcode'] = mysqli_connect_errno();
-    $_SESSION['errdesc'] = mysqli_connect_error();
+    $_SESSION['errcode'] = -1;
+    $_SESSION['errdesc'] = "niepoprawny tekst Captcha";
     header("Location: register.php");
     die;
 }

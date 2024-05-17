@@ -132,13 +132,13 @@ session_start();
                 password.animate([
                     {filter: 'brightness(200%)'},
                     {filter: 'brightness(100%)'}
-                ], {duration: 750});
+                ], {duration: 1500});
             }
             setTimeout(() => {
                 if(document.getElementById("password").getAttribute("type") == "text"){
                     togglePassword();
                 }
-            }, 750);
+            }, 1500);
         }
     </script>
 </body>

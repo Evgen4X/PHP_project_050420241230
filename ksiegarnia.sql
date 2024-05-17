@@ -3300,34 +3300,6 @@ INSERT INTO `zamowienia` (`id_zamowienia`, `data_zlozenia_zamowienia`, `data_wys
 (563, '2010-11-11', '2011-07-15', '2', 370, 370, 217);
 
 --
--- Wyzwalacze `zamowienia`
---
-DELIMITER $$
-CREATE TRIGGER `zamowienia_BI` BEFORE INSERT ON `zamowienia` FOR EACH ROW begin
-    if new.id_klienta not in (select id_klienta from klient) then
-        set new.id_klienta = (select id_klienta from klient limit 1);
-    end if;
-
-    if new.id_faktury not in (select id_faktury from faktura) then
-		set new.id_faktury = (select id_faktury from faktura limit 1);
-	end if;
-
-	if new.id_ksiazki not in (select id_ksiazki from ksiazki) then
-		set new.id_ksiazki = (select id_ksiazki from ksiazki limit 1);
-	end if;
-
-	if new.data_zlozenia_zamowienia = null then
-		set new.data_zlozenia_zamowienia = date(now());
-	end if;
-
-	if new.data_wyslania = null then
-		set new.data_wyslania = date_add(date(now()), interval 14 day);
-	end if;
-end
-$$
-DELIMITER ;
-
---
 -- Indeksy dla zrzutów tabel
 --
 

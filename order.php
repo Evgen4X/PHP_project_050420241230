@@ -13,8 +13,6 @@ session_start();
 </head>
 <body>
     <?php
-    include("cipher.php");
-
     $id = mysqli_connect("localhost", "root", "", "ksiegarnia");
     $data = mysqli_fetch_row(mysqli_query($id, "select imie, nazwisko, data_urodzenia, plec, kod_pocztowy, miejscowosc, ulica, nr_domu, telefon, adres_e_mail from klient where id_klienta = ".$_SESSION['uid'].";"));
     $imie = $data[0] ? "'".$data[0]."'" : "''";
