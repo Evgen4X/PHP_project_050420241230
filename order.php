@@ -21,8 +21,6 @@
     $telefon = $data[8] ? "'".$data[8]."'" : "''";
     $adres_e_mail = $data[9] ? "'".$data[9]."'" : "''";
     
-    setcookie("lista", $_COOKIE['lista'] . ', ' . $_POST['data'], time() + 3600);
-
     echo "<nav>";
 
     echo "Witaj, ".($imie ? substr($imie, 1, strlen($imie) - 2) : '').'!';
@@ -34,16 +32,20 @@
     $lista = [];
     $i = 0;
     $val = "";
+    echo $_COOKIE['lista'];
     while($i < strlen($_COOKIE['lista'])){
         if($i == ','){
             array_push($lista, $val);
+            $val = "";
         }
-        elseif($i != ' '){
+        else{
             $val .= $i;
         }
 
+        
         ++$i;
     }
+    var_dump($lista);
 
     foreach($lista as $i){
         $data = mysqli_fetch_row(mysqli_query("select tytul, concat(substr(imie, 1, 1), '. ', nazwisko), ilosc, cena, jezyk_ksiazki from ksiazki join autor using (id_autora);"));
