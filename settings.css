@@ -17,3 +17,7 @@ td div {
 	justify-content: start;
 	align-items: start;
 }
+
+input{
+	width: 80vh;
+}

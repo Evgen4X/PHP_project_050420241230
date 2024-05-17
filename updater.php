@@ -1,13 +1,17 @@
 <?php
-
-include("cipher.php");
+session_start();
+?>
+<?php
 
 $origin = $_POST['origin'];
 
 $id = mysqli_connect("localhost", "root", "", "ksiegarnia");
 if(!$id){
-    header("Location: $origin?uid=".encode($_POST['uid'])."&err=1&errcode=".mysqli_connect_errno().'&errdesc='.mysqli_connect_error());
-    exit;
+    $_SESSION['err'] = 1;
+    $_SESSION['errcode'] = mysqli_connect_errno();
+    $_SESSION['errdesc'] = mysqli_connect_error();
+    header("Location: $origin");
+    die;
 }
 
 $query = "update klient set ";
@@ -22,7 +26,6 @@ foreach($_POST as $key => $val){
         foreach($val as $valval){
             $value .= $valval . ", ";
         }
-        setcookie($key, substr($value, 0, strlen($value) - 2), time() + 3600); //TODO: set to smth better
     }
 }
 
@@ -32,12 +35,15 @@ if($query != "update klient set "){
 
     $result = mysqli_query($id, $query);
     if(!$result){
-        header("Location: $origin?uid=".encode($_POST['uid'])."&err=2&errcode=".mysqli_errno($id).'&errdesc='.mysqli_error($id));
-        exit;
+        $_SESSION['err'] = 2;
+        $_SESSION['errcode'] = mysqli_errno($id);
+        $_SESSION['errdesc'] = mysqli_error($id);
+        header("Location: $origin");
+        die;
     }
 }
 
-header("Location: $origin?uid=".encode($_POST['uid']));
-exit;
+header("Location: $origin");
+die;
 
 ?>

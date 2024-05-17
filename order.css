@@ -1,0 +1,17 @@
+input#ilosc{
+    width: 3em;
+    outline: none;
+    border: none;
+}
+
+table{
+    border-collapse: collapse;
+}
+
+th, td{
+    border: 1px solid black;
+}
+
+main{
+    padding-top: 5vh;
+}

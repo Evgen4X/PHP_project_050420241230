@@ -44,10 +44,63 @@ nav div a:visited {
 	color: white;
 }
 
+aside{
+	position: absolute;
+	top: 10vh;
+	left: 0;
+	width: 13vw;
+	height: 80vh;
+	padding: 2vw;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	border: 1px solid black;
+}
+
+aside fieldset{
+	width: 12vw;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+aside fieldset input[type='number']{
+	width: 4em;
+}
+
+aside fieldset div.checkbox2{
+	width: 0.25em;
+	height: 0;
+	border-style: solid;
+	border-width: 0.5em;
+	border-color: gray;
+}
+
+aside fieldset div.checkbox1{
+	width: 0;
+	height: 0;
+	margin-top: -1em;
+	border-style: solid;
+	border-width: 1em;
+	border-color: transparent transparent green transparent;
+}
+
+aside fieldset div.checkbox0{
+	width: 0;
+	height: 0;
+	margin-top: 1em;
+	border-style: solid;
+	border-width: 1em;
+	border-color: red transparent transparent transparent;
+}
+
 main {
+	width: 90vw;
 	margin-top: -3vh;
+	margin-left: 10vw;
 	min-height: 85vh;
-	padding: 0 2vh 2vh 2vh;
+	padding: 3vh;
 }
 
 main div#main {
@@ -59,35 +112,52 @@ main div#main {
 
 #main > .ksiazka {
 	height: 33vh;
-	width: 15vw;
+	width: 14vw;
+	border: 0.5vh outset rgba(127, 127, 127, 0.5);
+	margin: 1vh;
+	box-shadow: 0 0 1vh black;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: larger;
 }
 
-#main > div .autor::before {
+.autor::before {
 	content: "Autor: ";
 }
 
-#main > div .cena::before {
+.cena::before {
 	content: "Cena: ";
 }
 
-#main > div .cena::after {
+.cena::after {
 	content: "zł";
 }
 
-#main > div .gatunek::before{
+.gatunek::before{
 	content: "Gatunek: ";
 }
 
-#main > div .jezyk::before{
+.jezyk::before{
 	content: "Jezyk: ";
 }
 
-#main > div .rok::before{
+.rok::before{
 	content: "Wydano w ";
 }
 
-#main > div .rok::after{
+.rok::after{
 	content: " r.";
+}
+
+.kup{
+	width: 10em;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	font-weight: 600;
+	text-transform: uppercase;
 }
 
 select {
@@ -105,6 +175,9 @@ footer {
 	background-color: #2f2f2f;
 	font-size: x-large;
 	color: #ebebeb;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 footer a {
