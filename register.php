@@ -16,6 +16,9 @@ session_start();
         <form action="registrator.php" method="post">
             <span>Załóż konto</span>
             <?php
+            $captchaText = "";
+            for($i = 0; $i++ < 6; $captchaText .= "ABCDEFGHIJKLMNOPQRSTUVWXYZ23456789"[rand(0,33)]);
+            echo "<input type='hidden' name='captcha' value='".$captchaText."'>";
             echo "<input type='mail' id='email' name='adres_e_mail' placeholder='e-mail' value='".(isset($_SESSION["email"]) ? $_SESSION['email'] : '')."' requied>";
             echo "<input type='text' id='login' name='login' placeholder='login' value='".(isset($_SESSION['login']) ? $_SESSION['login'] : '')."' requied>";
             echo "<div id='password-div' style='display: flex; justify-content: center; align-items: center; flex-direction: row;'>
@@ -24,6 +27,8 @@ session_start();
             </div>";
             echo "<input type='tel' id='tel' name='telefon' placeholder='telefon' value='".(isset($_SESSION['tel']) ? $_SESSION['tel'] : '')."' requied>";
             ?>
+            <canvas id="captcha"></canvas>
+            <input name="captchaEntered">
             <div id="error">
                 <?php
                     if(isset($_SESSION['err'])){
@@ -164,6 +169,18 @@ session_start();
                     togglePassword();
                 }
             }, 750);
+        }
+        function setCaptcha(text){
+            let cvs = document.getElementById('captcha');
+            let c = cvs.getContext("2d");
+            cvs.setAttribute('width', CWidth/20);
+            cvs.setAttribute('height', CHeight/20);
+            let i = 0;
+            while(i < CWidth/20-CWifth/80){
+                c.fillStyle = `rgb()`;
+                let w = Math.random() * 
+                c.fillRect(i, i
+            }
         }
     </script>
 </body>
