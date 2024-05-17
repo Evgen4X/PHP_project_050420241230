@@ -65,7 +65,7 @@ session_start();
         </form>
     </aside>";
       
-    echo "<footer>Created by <a href='https://github.com/Evgen4X'>Evgen4X</a></footer>";
+    echo "<footer>Created by <a href='https://github.com/Evgen4X'>Evgen4X</a>".date("d.m.Y)."</footer>";
 
     ?>
 
