@@ -3,6 +3,17 @@ session_start();
 ?>
 <?php
 
+if($_POST['captchaEntered'] != $_POST['captcha']){
+    $_SESSION['login'] = $login;
+    $_SESSION['password'] = $haslo;
+    $_SESSION['email'] = $email;
+    $_SESSION['tel'] = $telefon;
+    $_SESSION['errcode'] = mysqli_connect_errno();
+    $_SESSION['errdesc'] = mysqli_connect_error();
+    header("Location: register.php");
+    die;
+}
+
 include("cipher.php");
 
 $login = str_replace("'", "\\'", $_POST['login']);
@@ -17,8 +28,8 @@ if(!$id){
     $_SESSION['email'] = $email;
     $_SESSION['tel'] = $telefon;
     $_SESSION['err'] = 1;
-    $_SESSION['errcode'] = mysqli_connect_errno();
-    $_SESSION['errdesc'] = mysqli_connect_error();
+    $_SESSION['errcode'] = -1;
+    $_SESSION['errdesc'] = 'Incorrect Captcha';
     header("Location: register.php");
     die;
 }

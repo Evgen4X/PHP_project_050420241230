@@ -14,10 +14,15 @@ div#form {
 	align-items: center;
 }
 
-canvas{
+canvas#main-canvas{
 	position: absolute;
 	width: 100vw;
 	height: 100vh;
+}
+
+canvas#captcha{
+	max-width: 10vw;
+	max-height: 5vh;
 }
 
 div#form {

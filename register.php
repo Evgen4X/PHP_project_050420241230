@@ -11,13 +11,13 @@ session_start();
     <title>Tworzenie konta</title>
 </head>
 <body>
-    <canvas width="" height=""></canvas>
+    <canvas width="" height="" id="main-canvas"></canvas>
     <div id="form">
         <form action="registrator.php" method="post">
             <span>Załóż konto</span>
             <?php
             $captchaText = "";
-            for($i = 0; $i++ < 6; $captchaText .= "ABCDEFGHIJKLMNOPQRSTUVWXYZ23456789"[rand(0,33)]);
+            for($i = 0; $i++ < 7; $captchaText .= "ABCDEFGHIJKLMNOPQRSTUVWXYZ23456789"[rand(0,33)]);
             echo "<input type='hidden' name='captcha' value='".$captchaText."'>";
             echo "<input type='mail' id='email' name='adres_e_mail' placeholder='e-mail' value='".(isset($_SESSION["email"]) ? $_SESSION['email'] : '')."' requied>";
             echo "<input type='text' id='login' name='login' placeholder='login' value='".(isset($_SESSION['login']) ? $_SESSION['login'] : '')."' requied>";
@@ -26,9 +26,12 @@ session_start();
                 <div id='show-password' onclick='togglePassword();'></div>
             </div>";
             echo "<input type='tel' id='tel' name='telefon' placeholder='telefon' value='".(isset($_SESSION['tel']) ? $_SESSION['tel'] : '')."' requied>";
+            echo "<script>setTimeout(() => {setCaptcha('$captchaText');}, 10)</script>";
             ?>
-            <canvas id="captcha"></canvas>
-            <input name="captchaEntered">
+            <div style='display: flex; justify-content: space-evenly; align-items: center; flex-direction: column; height: 7em;'>
+                <canvas id="captcha"></canvas>
+                <input name="captchaEntered">
+            </div>
             <div id="error">
                 <?php
                     if(isset($_SESSION['err'])){
@@ -135,7 +138,7 @@ session_start();
             });
         }
 
-        const canvas = document.querySelector('canvas');
+        const canvas = document.getElementById('main-canvas');
         document.querySelectorAll('*').forEach(idk => {idk.onmousemove = canvasClicked;});
 
         const CWidth = window.innerWidth;
@@ -173,14 +176,25 @@ session_start();
         function setCaptcha(text){
             let cvs = document.getElementById('captcha');
             let c = cvs.getContext("2d");
-            cvs.setAttribute('width', CWidth/20);
+            cvs.setAttribute('width', CWidth/10);
             cvs.setAttribute('height', CHeight/20);
             let i = 0;
-            while(i < CWidth/20-CWifth/80){
-                c.fillStyle = `rgb()`;
-                let w = Math.random() * 
-                c.fillRect(i, i
+            let r = Math.floor(Math.random() * 155) + 100;
+            let g = Math.floor(Math.random() * 155) + 100;
+            let b = Math.floor(Math.random() * 155) + 100;
+            while(i < CWidth/10){
+                c.fillStyle = `rgb(${r}, ${g}, ${b})`;
+                c.fillRect(i++, 0, 1, CHeight/20); //TODO: fix
+                r += Math.random() * 10 - 5;
+                g += Math.random() * 10 - 5;
+                b += Math.random() * 10 - 5;
             }
+            r -= Math.random() * 100;
+            g -= Math.random() * 100;
+            b -= Math.random() * 100;
+            c.strokeStyle = `rgb(${r}, ${g}, ${b})`;
+            c.font = "3em Arial";
+            c.strokeText(text, 15, CHeight/27, CWidth / 12);
         }
     </script>
 </body>

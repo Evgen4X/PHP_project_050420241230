@@ -11,7 +11,7 @@ session_start();
     <title>Logowanie</title>
 </head>
 <body>
-    <canvas width="" height=""></canvas>
+    <canvas width="" height="" id='main-canvas'></canvas>
     <div id="form">
         <form action="logger.php" method="post">
             <span>Zaloguj się</span>
