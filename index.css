@@ -182,7 +182,7 @@ footer {
 	font-size: x-large;
 	color: #ebebeb;
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-around;
 	align-items: center;
 }
 

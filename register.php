@@ -89,6 +89,9 @@ session_start();
 
     <script>
         function gen(){
+            if(bubbles.length > 150){
+                bubbles.splice(150);
+            }
             let b = [Math.floor(Math.random() * CWidth), Math.floor(Math.random() * CHeight), Math.random() * 2 - 1, Math.random() * 2 - 1, Math.floor(Math.random() * 4 + 1)];
             let n = bubbles.length;
             bubbles.push(b);
@@ -153,7 +156,7 @@ session_start();
         const img = new Image(CWidth, CHeight);
         img.src = 'login-background.jpg';
 
-        for(let i = 0; ++i < 200; gen());
+        for(let i = 0; ++i < 100; gen());
 
         setInterval(gen, 75);
         setInterval(anim, 10);

@@ -1,7 +1,10 @@
 <?php
+session_start();
+?>
+<?php
 
 $id = mysqli_connect("localhost", "root", "");
-mysqli_query($id, "drop database ksiegarnia;");
+mysqli_query($id, "drop database if exists ksiegarnia;");
 mysqli_query($id, "create database ksiegarnia;");
 mysqli_select_db($id, "ksiegarnia");
 
@@ -10,7 +13,6 @@ if($file){
     $commented = false;
     $query = "";
     while(($line = fgets($file)) != false){
-        // echo $line.'<br>';
 
         if(substr($line, 0, 2) == '--'){
             continue;
@@ -29,14 +31,22 @@ if($file){
         if(preg_match('/.*;.?/', $line)){
             try{
             mysqli_query($id, $query);}
-            catch(Exception $e){}
+            catch(Exception $e){
+                echo $e;
+                echo '<br><br>';
+            }
             $query = "";
         }
     }
 
-    echo $query;
-
     fclose($file);
+}
+
+if(isset($_SESSION['origin'])){
+    $a = $_SESSION['origin'];
+    unset($_SESSION['origin']);
+    header("Location: $a");
+    die;
 }
 
 ?>

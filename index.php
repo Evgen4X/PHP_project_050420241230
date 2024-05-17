@@ -12,32 +12,51 @@ session_start();
 </head>
 <body>
     <?php
-    $id = mysqli_connect("localhost", "root", "", "ksiegarnia");
-    echo "<nav>".
-        (isset($_SESSION['uid']) ? "<div><a href='logout.php'>Log out</a></div>" : "<div><a href='login.php'>Log in</a></div>").
-        (isset($_SESSION['uid']) ? "<div><a href='settings.php'>Ustawienia</a></div>" : "").
-        "</nav>";
+    try{
+        $id = mysqli_connect("localhost", "root", "", "ksiegarnia");
+    } catch (Exception $ex){
+        if(mysqli_connect_errno() == 1049){
+            $_SESSION['origin'] = 'index.php';
+            header('Location: createdb.php');
+            die;
+        }
+    }
 
-    echo "<main><div id='main'>";
+    echo "<nav>";
+    if(isset($_SESSION['uid'])){
+        echo "<div><a href='logout.php'>Log out</a></div>
+            <div><a href='settings.php'>Ustawienia</a></div>";
+        $a = mysqli_query($id, "select admin from klient where id_klienta = ".$_SESSION['uid'].";");
+        if($a && mysqli_fetch_row($a)[0] == 1){
+            echo "<div><a href='admin.php'>Admin</a></div>";
+        }
+    }
+    else{
+        echo "<div><a href='login.php'>Log in</a></div>";
+    }
+
+    echo "</nav><main><div id='main'>";
 
     for($i = 1; $i < 100; ++$i){
         $book = mysqli_query($id, "select ksiazki.tytul, concat(substr(autor.imie, 1, 1), '. ', autor.nazwisko), ksiazki.cena,  ksiazki.gatunek, ksiazki.jezyk_ksiazki, ksiazki.rok_wydania, ksiazki.id_ksiazki from ksiazki join autor using (id_autora) WHERE ksiazki.id_ksiazki > -1 AND ksiazki.cena BETWEEN ".(isset($_POST['cena-min']) ? $_POST['cena-min'] : 0)." AND ".(isset($_POST['cena-max']) ? $_POST['cena-max'] : 10000)." ".(isset($_POST['sort-cena']) && $_POST['sort-cena'] != '2' ? "order by ksiazki.cena ".(isset($_POST['sort-cena']) && $_POST['sort-cena'] == '1' ? 'asc' : 'desc') : "").(isset($_POST['sort-autor']) && $_POST['sort-autor'] != '2' ? (isset($_POST['sort-cena']) && $_POST['sort-cena'] != '2' ? ", " : 'order by ')."autor.imie ".(isset($_POST['sort-autor']) && $_POST['sort-autor'] == '1' ? 'asc' : 'desc') : "").(isset($_POST['sort-rok-wydania']) && $_POST['sort-rok-wydania'] != '2' ? (isset($_POST['sort-cena']) && $_POST['sort-cena'] != '2' || isset($_POST['sort-autor']) && $_POST['sort-autor'] != '2' ? ", " : 'order by ')."ksiazki.rok_wydania ".(isset($_POST['sort-rok-wydania']) && $_POST['sort-rok-wydania'] == '1' ? 'asc' : 'desc') : "")." limit $i, 1;");
         if($book){
             $data = mysqli_fetch_row($book);
-            echo "<div class='ksiazka'>
-                    <form action='order.php' method='post'>
-                        <div class='title'>".$data[0]."</div>
-                        <div class='autor'>".$data[1]."</div>
-                        <div class='cena'>".$data[2]."</div>
-                        <div class='gatunek'>".$data[3]."</div>
-                        <div class='jezyk'>".$data[4]."</div>
-                        <div class='rok'>".$data[5]."</div>
-                        <input type='hidden' name='data' value=".$data[6].">
-                        ".(isset($_SESSION['uid']) ? "
-                        <input type='hidden' name='uid' value='".$_SESSION['uid']."'>
-                        <input type='submit' class='kup' value='kup'>" : "<a href='login.php' style='display: block;' class='div-submit kup'>kup</a>")."
-                    </form>
-                </div>";
+            if($data){
+                echo "<div class='ksiazka'>
+                        <form action='order.php' method='post'>
+                            <div class='title'>".$data[0]."</div>
+                            <div class='autor'>".$data[1]."</div>
+                            <div class='cena'>".$data[2]."</div>
+                            <div class='gatunek'>".$data[3]."</div>
+                            <div class='jezyk'>".$data[4]."</div>
+                            <div class='rok'>".$data[5]."</div>
+                            <input type='hidden' name='data' value=".$data[6].">
+                            ".(isset($_SESSION['uid']) ? "
+                            <input type='hidden' name='uid' value='".$_SESSION['uid']."'>
+                            <input type='submit' class='kup' value='kup'>" : "<a href='login.php' style='display: block;' class='div-submit kup'>kup</a>")."
+                        </form>
+                    </div>";
+            }
         }
     }
 
@@ -48,8 +67,8 @@ session_start();
         <form action='index.php' method='post'>
             <fieldset>
                 <legend>Cena</legend>
-                <input type='number' value='0' placeholder='min' name='cena-min' id='cena-min'>
-                <input type='number' value='10000' placeholder='max' name='cena-max' id='cena-max'>
+                <input type='number' value='".(!isset($_POST['cena-min']) ? 0 : $_POST['cena-min'])."' placeholder='min' name='cena-min' id='cena-min'>
+                <input type='number' value='".(!isset($_POST['cena-max']) ? 10000 : $_POST['cena-max'])."' placeholder='max' name='cena-max' id='cena-max'>
             </fieldset>
             <fieldset>
                 <legend>Sortuj</legend>

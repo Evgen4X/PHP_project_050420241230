@@ -11,7 +11,7 @@ unset($_SESSION['err']);
 $login = str_replace("'", "\\'", $_POST['login']);
 $haslo = str_replace("'", "\\'", $_POST['password']);
 
-if(time() - $_POST['start'] < 7){ //prevents entering log in data too fast (min 7 sec. is requied to pass)
+if(time() - $_POST['start'] < 5){ //prevents entering log in data too fast
     $_SESSION['login'] = $login;
     $_SESSION['password'] = $haslo;
     $_SESSION['err'] = 3;

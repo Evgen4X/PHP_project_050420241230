@@ -35,7 +35,7 @@ session_start();
             <div id='setting-preferencje' onclick=\"toggle('Preferencje', ".$_SESSION['uid'].");\">Preferencje</div>
         </nav>"; 
 
-        echo "<main></main><footer>Created by <a href='github.com/Evgen4X'>Evgen4X</a></footer>";
+        echo "<main></main><footer><span>Created by <a href='https://github.com/Evgen4X'>Evgen4X</a></span><span>".date("d.m.Y")."</span></footer>";
 
         echo "<script> setTimeout(() => {toggle('Konto', ".$_SESSION['uid'].", $imie, $nazwisko, $data_urodzenia, $plec, $kod_pocztowy, $miejscowosc, $ulica, $nr_domu, $telefon, $adres_e_mail)}, 200);</script>";
     ?>
@@ -51,8 +51,8 @@ session_start();
                 div.style.backgroundColor = '#2f2f2f';
                 div.style.borderColor = '#2f2f2f';
             });
-            document.getElementById('setting-' + name.toLowerCase()).style.backgroundColor = '#ef6461';
-            document.getElementById('setting-' + name.toLowerCase()).style.borderColor = '#ef6461';
+            document.getElementById('setting-' + name).style.backgroundColor = '#ef6461';
+            document.getElementById('setting-' + name).style.borderColor = '#ef6461';
             if(name == 'Konto'){
                 main.innerHTML = `
                 <form action="updater.php" method="post">
