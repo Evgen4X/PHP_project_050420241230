@@ -760,7 +760,8 @@ CREATE TABLE `klient` (
   `nr_domu` varchar(7) DEFAULT NULL,
   `PESEL` varchar(11) NOT NULL,
   `telefon` varchar(12) DEFAULT NULL,
-  `adres_e_mail` varchar(70) DEFAULT NULL
+  `adres_e_mail` varchar(70) DEFAULT NULL, 
+  `admin` int DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
