@@ -30,7 +30,7 @@ foreach($_POST as $key => $val){
 }
 
 if($query != "update klient set "){
-    $query .= " where id_klienta = ".$_POST['uid'];
+    $query .= " where id_klienta = ".$_SESSION['uid'];
 
 
     $result = mysqli_query($id, $query);

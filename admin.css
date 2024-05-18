@@ -1,0 +1,65 @@
+main {
+	width: 90vw;
+	margin-left: 0 !important;
+}
+
+tr {
+	width: 100vw;
+	height: 10vh;
+}
+
+tr .delete {
+	width: 1.25em;
+	height: 1.25em;
+	background-image: url(bin.png);
+	background-size: 1.25em 1.25em;
+	cursor: pointer;
+}
+
+tr .delete[id$="1"] {
+	background-image: url(unbin.png);
+}
+
+tr input[name*="tytul"] {
+	width: 6em;
+}
+
+tr input[name*="id-autora"] {
+	width: 4vw;
+}
+
+tr input[name*="cena"] {
+	width: 3em;
+}
+
+tr input[name*="ilosc"] {
+	width: 2.75em;
+}
+
+tr input[name*="wydawnictwo"] {
+	width: 10em;
+}
+
+tr input[name*="temat"] {
+	width: 6em;
+}
+
+tr input[name*="gatunek"] {
+	width: 5em;
+}
+
+tr input[name*="miejsce-wydania"] {
+	width: 9em;
+}
+
+tr input[name*="jezyk-ksiazki"] {
+	width: 7em;
+}
+
+tr input[name*="opis"] {
+	width: calc(max(12.5em, calc(90vw - 100em)));
+}
+
+tr input[name*="rok-wydania"] {
+	width: 4em;
+}

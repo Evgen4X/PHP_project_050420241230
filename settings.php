@@ -70,7 +70,6 @@ session_start();
                     <tr><td><label for="adres_e_mail">Adres e-mail</label></td><td><input type="text" id="adres_e_mail" pattern="^[a-zA-Z0-9\-\+\._]+@[a-zA-Z]+\.[a-zA-Z]+$" placeholder="przyklad@adresu.email" title="przyklad: przyklad@gmail.com" "name="adres_e_mail" value="${email}"></td></tr>
                     </table>
                     <input type="hidden" name="origin" value="settings.php">
-                    <input type="hidden" name="uid" value="${parseInt(id)}">
 
                     <input type="submit" value="Zapisz">
                 </form>
@@ -110,7 +109,6 @@ session_start();
                     </table>
 
                     <input type="hidden" name="origin" value="settings.php">
-                    <input type="hidden" name="uid" value="${parseInt(id)}">
 
                     <input type="submit" value="Zapisz">
                 </form>

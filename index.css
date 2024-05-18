@@ -20,6 +20,7 @@ nav {
 	display: flex;
 	justify-content: start;
 	align-items: start;
+	user-select: none;
 }
 
 nav div {
@@ -184,6 +185,7 @@ footer {
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
+	user-select: none;
 }
 
 footer a {
