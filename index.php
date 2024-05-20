@@ -12,14 +12,11 @@ session_start();
 </head>
 <body>
     <?php
-    try{
-        $id = mysqli_connect("localhost", "root", "", "ksiegarnia");
-    } catch (Exception $ex){
-        if(mysqli_connect_errno() == 1049){
-            $_SESSION['origin'] = 'index.php';
-            header('Location: createdb.php');
-            die;
-        }
+    $id = mysqli_connect("localhost", "root", "");
+    if(!mysqli_select_db($id, "ksiegarnia")){
+        $_SESSION['origin'] = 'index.php';
+        header('Location: createdb.php');
+        die;
     }
 
     echo "<nav>";
