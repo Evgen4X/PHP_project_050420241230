@@ -4,9 +4,17 @@ main {
 	color: var(--txt);
 }
 
+table,
+tr,
+td,
+th {
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
 tr {
 	width: 100vw;
-	height: 10vh;
+	height: 2.5em;
 }
 
 tr .delete {
@@ -19,12 +27,16 @@ tr .delete {
 }
 
 tr input {
-	background-color: var(--bg);
-	color: var(--txt);
+	height: 2em;
+	width: 90%;
+	outline: none;
+	border: none;
+	background: none;
 }
 
 tr .delete[id$="1"] {
 	background-image: url(unbin.png);
+	width: 2em;
 }
 
 tr input[name*="tytul"] {
@@ -68,5 +80,5 @@ tr input[name*="opis"] {
 }
 
 tr input[name*="rok-wydania"] {
-	width: 4em;
+	width: 6.25em;
 }
