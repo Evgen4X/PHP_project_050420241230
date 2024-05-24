@@ -2,7 +2,7 @@
 session_start();
 ?>
 <!DOCTYPE html>
-<html lang="pl">
+<html class="light" lang='pl'>
 <head>
     <link rel="stylesheet" href="index.css">
     <link rel="icon" href="icon.png">
@@ -35,7 +35,7 @@ session_start();
         echo "<div><a href='login.php'>Log in</a></div>";
     }
 
-    echo "</nav><main><div id='main'>";
+    echo "<div id='light-dark-toggle' onclick='toggleTheme();'></div></nav><main><div id='main'>";
 
     for($i = 1; $i < 100; ++$i){
         $book = mysqli_query($id, "select ksiazki.tytul, concat(substr(autor.imie, 1, 1), '. ', autor.nazwisko), ksiazki.cena,  ksiazki.gatunek, ksiazki.jezyk_ksiazki, ksiazki.rok_wydania, ksiazki.id_ksiazki from ksiazki join autor using (id_autora) WHERE ksiazki.id_ksiazki > -1 AND ksiazki.cena BETWEEN ".(isset($_POST['cena-min']) ? $_POST['cena-min'] : 0)." AND ".(isset($_POST['cena-max']) ? $_POST['cena-max'] : 10000)." ".(isset($_POST['sort-cena']) && $_POST['sort-cena'] != '2' ? "order by ksiazki.cena ".(isset($_POST['sort-cena']) && $_POST['sort-cena'] == '1' ? 'asc' : 'desc') : "").(isset($_POST['sort-autor']) && $_POST['sort-autor'] != '2' ? (isset($_POST['sort-cena']) && $_POST['sort-cena'] != '2' ? ", " : 'order by ')."autor.imie ".(isset($_POST['sort-autor']) && $_POST['sort-autor'] == '1' ? 'asc' : 'desc') : "").(isset($_POST['sort-rok-wydania']) && $_POST['sort-rok-wydania'] != '2' ? (isset($_POST['sort-cena']) && $_POST['sort-cena'] != '2' || isset($_POST['sort-autor']) && $_POST['sort-autor'] != '2' ? ", " : 'order by ')."ksiazki.rok_wydania ".(isset($_POST['sort-rok-wydania']) && $_POST['sort-rok-wydania'] == '1' ? 'asc' : 'desc') : "")." limit $i, 1;");
@@ -99,6 +99,23 @@ session_start();
                 div.classList.add('checkbox0');
             }
             document.getElementById(name).value = div.classList.contains('checkbox1') ? '1' : div.classList.contains('checkbox2') ? '2' : '0';
+        }
+
+        function toggleTheme(){
+            html.classList.toggle('light');
+            html.classList.toggle('dark');
+            console.log(html.classList.contains('dark'));
+            if(html.classList.contains('dark')){
+                localStorage.setItem('theme', 'dark')
+            } else {
+                localStorage.setItem('theme', 'light')
+            }
+        }
+
+        const html = document.querySelector('html');
+        if(localStorage.getItem('theme') == 'dark'){
+            html.classList.toggle('light');
+            html.classList.toggle('dark');
         }
     </script>
 

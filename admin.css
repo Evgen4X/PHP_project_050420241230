@@ -1,6 +1,7 @@
 main {
 	width: 90vw;
 	margin-left: 0 !important;
+	color: var(--txt);
 }
 
 tr {
@@ -11,9 +12,15 @@ tr {
 tr .delete {
 	width: 1.25em;
 	height: 1.25em;
+	background-color: transparent;
 	background-image: url(bin.png);
 	background-size: 1.25em 1.25em;
 	cursor: pointer;
+}
+
+tr input {
+	background-color: var(--bg);
+	color: var(--txt);
 }
 
 tr .delete[id$="1"] {

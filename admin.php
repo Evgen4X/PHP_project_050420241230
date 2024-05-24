@@ -2,7 +2,7 @@
 session_start();
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html class="light" lang="en">
 <head>
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="admin.css">
@@ -29,6 +29,7 @@ session_start();
             <div onclick='window.location.href = window.location.href.replace(\"admin\", \"index\");'>Wróć</div>
             <div id='type-klient' onclick=\"toggle('klient');\">Klient</div>
             <div id='type-ksiazka' onclick=\"toggle('ksiazka');\">Książka</div>
+            <div id='light-dark-toggle' onclick='toggleTheme();'></div>
         </nav>";
 
         echo "<main></main>";
@@ -48,8 +49,8 @@ session_start();
         }
         function toggle(type){
             document.querySelectorAll('nav div').forEach(div => {
-                div.style.backgroundColor = '#2f2f2f';
-                div.style.borderColor = '#2f2f2f';
+                div.style.backgroundColor = html.classList.contains('dark') ? '#6f6f6f' : '#3f3f3f';
+                div.style.borderColor = html.classList.contains('dark') ? '#6f6f6f' : '#3f3f3f';
             });
             document.getElementById('type-' + type).style.backgroundColor = '#ef6461';
             document.getElementById('type-' + type).style.borderColor = '#ef6461';
@@ -85,6 +86,27 @@ session_start();
             } else if(type == 'klient'){
                 main.innerHTML = `<h1>Edycja klienta</h1>`; //TODO: do.
             }
+        }
+
+        function toggleTheme(){
+            html.classList.toggle('light');
+            html.classList.toggle('dark');
+            console.log(html.classList.contains('dark'));
+            if(html.classList.contains('dark')){
+                localStorage.setItem('theme', 'dark')
+            } else {
+                localStorage.setItem('theme', 'light')
+            }
+            document.querySelectorAll('nav div:not([id="light-dark-toggle"])').forEach(div => {
+                div.style.backgroundColor = html.classList.contains('dark') ? '#6f6f6f' : '#3f3f3f';
+                div.style.borderColor = html.classList.contains('dark') ? '#6f6f6f' : '#3f3f3f';
+            });
+        }
+        const html = document.querySelector('html');
+
+        if(localStorage.getItem('theme') == 'dark'){
+            html.classList.toggle('light');
+            html.classList.toggle('dark');
         }
 
         const main = document.querySelector('main');

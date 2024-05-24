@@ -1,4 +1,29 @@
 /* https://coolors.co/palette/2f2f2f-5b8266-aef6c7-e07a5f-ef6461 */
+
+* {
+	transition: background-color 500ms ease-in-out;
+}
+
+html.light {
+	--bg: #ebebeb;
+	--txt: #2f2f2f;
+	--cbg: #3f3f3f;
+	--bgbgtxt: #cacaca;
+	--bgtxt: #afafaf;
+	--txtbg: #8f8f8f;
+	--img: url("dark.png");
+}
+
+html.dark {
+	--bg: #2f2f2f;
+	--txt: #cbcbcb;
+	--cbg: #6f6f6f;
+	--bgbgtxt: #8f8f8f;
+	--bgtxt: #4f4f4f;
+	--txtbg: #cacaca;
+	--img: url("light.png");
+}
+
 html,
 body {
 	margin: 0;
@@ -8,14 +33,14 @@ body {
 
 body {
 	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-	background-color: #ebebeb;
+	background-color: var(--bg);
 }
 
 nav {
 	width: 100vw;
 	height: 5vh;
-	background-color: #2f2f2f;
-	color: #ebebeb;
+	background-color: var(--cbg);
+	color: var(--bg);
 	font-size: larger;
 	display: flex;
 	justify-content: start;
@@ -23,12 +48,23 @@ nav {
 	user-select: none;
 }
 
+nav #light-dark-toggle {
+	position: absolute;
+	top: 0.5vh;
+	right: 0.5vh;
+	width: 4vh;
+	height: 4vh;
+	border: none;
+	background-image: var(--img);
+	background-size: 4vh 4vh;
+}
+
 nav div {
 	border-width: 0 0.5em;
-	border-color: #2f2f2f;
+	border-color: var(--cbg);
 	border-style: solid;
 	height: 100%;
-	color: white;
+	color: var(--bg);
 }
 
 nav div:hover {
@@ -37,12 +73,12 @@ nav div:hover {
 }
 
 nav div a {
-	color: white;
+	color: var(--bg);
 	text-decoration: none;
 }
 
 nav div a:visited {
-	color: white;
+	color: var(--bg);
 }
 
 aside {
@@ -57,6 +93,7 @@ aside {
 	align-items: center;
 	flex-direction: column;
 	border: 1px solid black;
+	color: var(--txt);
 }
 
 aside fieldset {
@@ -68,6 +105,8 @@ aside fieldset {
 
 aside fieldset input[type="number"] {
 	width: 4em;
+	background-color: var(--bg);
+	color: var(--txt);
 }
 
 aside fieldset div.checkbox2 {
@@ -100,7 +139,7 @@ main {
 	width: 90vw;
 	margin-top: -3vh;
 	margin-left: 10vw;
-	min-height: 85vh;
+	min-height: 82vh;
 	padding: 3vh;
 }
 
@@ -121,6 +160,7 @@ main div#main {
 	justify-content: center;
 	align-items: center;
 	font-size: larger;
+	color: var(--txt);
 }
 
 .title {
@@ -138,7 +178,7 @@ main div#main {
 }
 
 .cena::after {
-	content: "zł";
+	content: "zl";
 }
 
 .gatunek::before {
@@ -168,20 +208,20 @@ main div#main {
 }
 
 select {
-	background-color: #cacaca;
+	background-color: var(--bgbgtxt);
 }
 
 select option:checked {
-	background-color: #8f8f8f;
+	background-color: var(--txtbg);
 }
 
 footer {
 	width: 100vw;
 	height: 10vh;
 	text-align: center;
-	background-color: #2f2f2f;
+	background-color: var(--cbg);
 	font-size: x-large;
-	color: #ebebeb;
+	color: var(--bg);
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
@@ -189,28 +229,28 @@ footer {
 }
 
 footer a {
-	color: #efefef;
+	color: var(--bg);
 	text-decoration: none;
 	font-weight: 600;
 }
 
 footer a:visited {
-	color: #8f8f8f;
+	color: var(--txtbg);
 }
 
 input[type="submit"],
 .div-submit {
 	text-decoration: none;
-	color: black;
+	color: var(--txt);
 	border: 2px outset black;
-	background-color: #afafaf;
+	background-color: var(--bgtxt);
 	outline: none;
 	transition: all 500ms ease-in-out;
 }
 
 input[type="submit"]:hover,
 .div-submit:hover {
-	background-color: #8f8f8f;
+	background-color: var(--txtbg);
 }
 
 input[type="submit"]:active,

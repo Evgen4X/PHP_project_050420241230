@@ -2,7 +2,7 @@
 session_start();
 ?>
 <!DOCTYPE html>
-<html lang="pl">
+<html class="light" lang="pl">
 <head>
     <link rel="icon" href="icon.png">
     <link rel="stylesheet" href="index.css">
@@ -14,30 +14,31 @@ session_start();
 <body>
     <?php
         $id = mysqli_connect("localhost", "root", "", "ksiegarnia");
-        $data = mysqli_fetch_row(mysqli_query($id, "select imie, nazwisko, data_urodzenia, plec, kod_pocztowy, miejscowosc, ulica, nr_domu, telefon, adres_e_mail from klient where id_klienta = ".$_SESSION['uid'].";"));
-        $imie = $data[0] ? "'".$data[0]."'" : "''";
-        $nazwisko = $data[1] ? "'".$data[1]."'" : "''";
-        $data_urodzenia = $data[2] ? "'".$data[2]."'" : "''";
-        $plec = $data[3] ? "'".$data[3]."'" : "''";
-        $kod_pocztowy = $data[4] ? "'".$data[4]."'" : "''";
-        $miejscowosc = $data[5] ? "'".str_replace("'", "\'", $data[5])."'" : "''";
-        $ulica = $data[6] ? "'".str_replace("'", "\'", $data[6])."'" : "''";
-        $nr_domu = $data[7] ? "'".$data[7]."'" : "''";
-        $telefon = $data[8] ? "'".$data[8]."'" : "''";
-        $adres_e_mail = $data[9] ? "'".$data[9]."'" : "''";
+        $data = mysqli_fetch_array(mysqli_query($id, "select imie, nazwisko, data_urodzenia, plec, kod_pocztowy, miejscowosc, ulica, nr_domu, telefon, adres_e_mail from klient where id_klienta = ".$_SESSION['uid'].";"));
+        $imie = $data['imie'] ? "'".$data['imie']."'" : "''";
+        $nazwisko = $data['nazwisko'] ? "'".$data['nazwisko']."'" : "''";
+        $data_urodzenia = $data['data_urodzenia'] ? "'".$data['data_urodzenia']."'" : "''";
+        $plec = $data['plec'] ? "'".$data['plec']."'" : "''";
+        $kod_pocztowy = $data['kod_pocztowy'] ? "'".$data['kod_pocztowy']."'" : "''";
+        $miejscowosc = $data['miejscowosc'] ? "'".str_replace("'", "\'", $data['miejscowosc'])."'" : "''";
+        $ulica = $data['ulica'] ? "'".str_replace("'", "\'", $data['ulica'])."'" : "''";
+        $nr_domu = $data['nr_domu'] ? "'".$data['nr_domu']."'" : "''";
+        $telefon = $data['telefon'] ? "'".$data['telefon']."'" : "''";
+        $adres_e_mail = $data['adres_e_mail'] ? "'".$data['adres_e_mail']."'" : "''";
 
         echo "<nav>";
 
-        echo "Witaj, ".($imie ? substr($imie, 1, strlen($imie) - 2) : '').'!';
+        echo "<span>Witaj, ".($imie ? substr($imie, 1, strlen($imie) - 2) : '').'!</span>';
         echo "
             <div onclick='window.location.href = window.location.href.replace(\"settings\", \"index\");'>Wróć</div>
-            <div id='setting-konto' onclick=\"toggle('Konto', $imie, $nazwisko, $data_urodzenia, $plec, $kod_pocztowy, $miejscowosc, $ulica, $nr_domu, $telefon, $adres_e_mail, ".$_SESSION['uid'].");\">Konto</div>
-            <div id='setting-preferencje' onclick=\"toggle('Preferencje', ".$_SESSION['uid'].");\">Preferencje</div>
+            <div id='setting-konto' onclick=\"toggle('konto', $imie, $nazwisko, $data_urodzenia, $plec, $kod_pocztowy, $miejscowosc, $ulica, $nr_domu, $telefon, $adres_e_mail, ".$_SESSION['uid'].");\">Konto</div>
+            <div id='setting-preferencje' onclick=\"toggle('preferencje', ".$_SESSION['uid'].");\">Preferencje</div>
+            <div id='light-dark-toggle' onclick='toggleTheme();'></div>
         </nav>"; 
 
         echo "<main></main><footer><span>Created by <a href='https://github.com/Evgen4X'>Evgen4X</a></span><span>".date("d.m.Y")."</span></footer>";
 
-        echo "<script> setTimeout(() => {toggle('Konto', ".$_SESSION['uid'].", $imie, $nazwisko, $data_urodzenia, $plec, $kod_pocztowy, $miejscowosc, $ulica, $nr_domu, $telefon, $adres_e_mail)}, 200);</script>";
+        echo "<script> setTimeout(() => {toggle('konto', ".$_SESSION['uid'].", $imie, $nazwisko, $data_urodzenia, $plec, $kod_pocztowy, $miejscowosc, $ulica, $nr_domu, $telefon, $adres_e_mail)}, 200);</script>";
     ?>
 
     <script>
@@ -47,13 +48,13 @@ session_start();
         }
         
         function toggle(name, id, imie="", nazwisko="", birthdate="", plec="", code="", city="", street="", house="", tel="", email=""){
-            document.querySelectorAll('nav div').forEach(div => {
-                div.style.backgroundColor = '#2f2f2f';
-                div.style.borderColor = '#2f2f2f';
+            document.querySelectorAll('nav div:not([id="light-dark-toggle"])').forEach(div => {
+                div.style.backgroundColor = html.classList.contains('dark') ? '#6f6f6f' : '#3f3f3f';
+                div.style.borderColor = html.classList.contains('dark') ? '#6f6f6f' : '#3f3f3f';
             });
             document.getElementById('setting-' + name).style.backgroundColor = '#ef6461';
             document.getElementById('setting-' + name).style.borderColor = '#ef6461';
-            if(name == 'Konto'){
+            if(name == 'konto'){
                 main.innerHTML = `
                 <form action="updater.php" method="post">
                     <h1>Konto</h1>
@@ -75,7 +76,7 @@ session_start();
                 </form>
                 `;
                 
-            } else if(name == 'Preferencje'){
+            } else if(name == 'preferencje'){
                 main.innerHTML = `
                 <form action="updater.php" method="post">
                     <h1>Preferencje</h1>
@@ -114,6 +115,27 @@ session_start();
                 </form>
                 `;
             }
+        }
+
+        function toggleTheme(){
+            html.classList.toggle('light');
+            html.classList.toggle('dark');
+            console.log(html.classList.contains('dark'));
+            if(html.classList.contains('dark')){
+                localStorage.setItem('theme', 'dark')
+            } else {
+                localStorage.setItem('theme', 'light')
+            }
+            document.querySelectorAll('nav div:not([id="light-dark-toggle"])').forEach(div => {
+                div.style.backgroundColor = html.classList.contains('dark') ? '#6f6f6f' : '#3f3f3f';
+                div.style.borderColor = html.classList.contains('dark') ? '#6f6f6f' : '#3f3f3f';
+            });
+        }
+        const html = document.querySelector('html');
+
+        if(localStorage.getItem('theme') == 'dark'){
+            html.classList.toggle('light');
+            html.classList.toggle('dark');
         }
 
         const main = document.querySelector('main');
