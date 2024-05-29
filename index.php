@@ -35,7 +35,7 @@ session_start();
     echo "<div id='light-dark-toggle' onclick='toggleTheme();'></div></nav><main><div id='main'>";
 
     for($i = 1; $i < 100; ++$i){
-        $book = mysqli_query($id, "select ksiazki.tytul, concat(substr(autor.imie, 1, 1), '. ', autor.nazwisko), ksiazki.cena,  ksiazki.gatunek, ksiazki.jezyk_ksiazki, ksiazki.rok_wydania, ksiazki.id_ksiazki from ksiazki join autor using (id_autora) WHERE ksiazki.id_ksiazki > -1 AND ksiazki.cena BETWEEN ".(isset($_POST['cena-min']) ? $_POST['cena-min'] : 0)." AND ".(isset($_POST['cena-max']) ? $_POST['cena-max'] : 10000)." ".(isset($_POST['sort-cena']) && $_POST['sort-cena'] != '2' ? "order by ksiazki.cena ".(isset($_POST['sort-cena']) && $_POST['sort-cena'] == '1' ? 'asc' : 'desc') : "").(isset($_POST['sort-autor']) && $_POST['sort-autor'] != '2' ? (isset($_POST['sort-cena']) && $_POST['sort-cena'] != '2' ? ", " : 'order by ')."autor.imie ".(isset($_POST['sort-autor']) && $_POST['sort-autor'] == '1' ? 'asc' : 'desc') : "").(isset($_POST['sort-rok-wydania']) && $_POST['sort-rok-wydania'] != '2' ? (isset($_POST['sort-cena']) && $_POST['sort-cena'] != '2' || isset($_POST['sort-autor']) && $_POST['sort-autor'] != '2' ? ", " : 'order by ')."ksiazki.rok_wydania ".(isset($_POST['sort-rok-wydania']) && $_POST['sort-rok-wydania'] == '1' ? 'asc' : 'desc') : "")." limit $i, 1;");
+        $book = mysqli_query($id, "select ksiazki.tytul, concat(substr(autor.imie, 1, 1), '. ', autor.nazwisko), ksiazki.cena,  ksiazki.gatunek, ksiazki.jezyk_ksiazki, ksiazki.rok_wydania, ksiazki.id_ksiazki from ksiazki join autor using (id_autora) WHERE".(isset($_POST['nazwa']) ? 'tytul = "'.$_POST['nazwa'].'" AND' : "")." ksiazki.id_ksiazki > -1".(isset())." AND ksiazki.cena BETWEEN ".(isset($_POST['cena-min']) ? $_POST['cena-min'] : 0)." AND ".(isset($_POST['cena-max']) ? $_POST['cena-max'] : 10000)." ".(isset($_POST['sort-cena']) && $_POST['sort-cena'] != '2' ? "order by ksiazki.cena ".(isset($_POST['sort-cena']) && $_POST['sort-cena'] == '1' ? 'asc' : 'desc') : "").(isset($_POST['sort-autor']) && $_POST['sort-autor'] != '2' ? (isset($_POST['sort-cena']) && $_POST['sort-cena'] != '2' ? ", " : 'order by ')."autor.imie ".(isset($_POST['sort-autor']) && $_POST['sort-autor'] == '1' ? 'asc' : 'desc') : "").(isset($_POST['sort-rok-wydania']) && $_POST['sort-rok-wydania'] != '2' ? (isset($_POST['sort-cena']) && $_POST['sort-cena'] != '2' || isset($_POST['sort-autor']) && $_POST['sort-autor'] != '2' ? ", " : 'order by ')."ksiazki.rok_wydania ".(isset($_POST['sort-rok-wydania']) && $_POST['sort-rok-wydania'] == '1' ? 'asc' : 'desc') : "")." limit $i, 1;");
         if($book){
             $data = mysqli_fetch_row($book);
             if($data){
@@ -62,6 +62,9 @@ session_start();
     echo "<aside>
         <h2>Fil</h2>
         <form action='index.php' method='post'>
+            <fieldset>
+                <input value='".(!isset($_POST['nazwa']) ? '' : $_POST['nazwa'])."' placeholder='tytuł' name='nazwa'>
+            </fieldset>
             <fieldset>
                 <legend>Cena</legend>
                 <input type='number' value='".(!isset($_POST['cena-min']) ? 0 : $_POST['cena-min'])."' placeholder='min' name='cena-min' id='cena-min'>
