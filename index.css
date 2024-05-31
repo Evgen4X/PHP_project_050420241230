@@ -11,6 +11,8 @@ html.light {
 	--bgbgtxt: #cacaca;
 	--bgtxt: #afafaf;
 	--txtbg: #8f8f8f;
+	--darkbg: #797979;
+	--darkerbg: #464646;
 	--img: url("dark.png");
 }
 
@@ -21,6 +23,8 @@ html.dark {
 	--bgbgtxt: #8f8f8f;
 	--bgtxt: #4f4f4f;
 	--txtbg: #cacaca;
+	--darkbg: #9b9b9b;
+	--darkerbg: #686868;
 	--img: url("light.png");
 }
 
@@ -82,11 +86,12 @@ nav div a:visited {
 }
 
 aside {
+	user-select: none;
 	position: absolute;
 	top: 10vh;
 	left: 0;
 	width: 13vw;
-	height: 80vh;
+	height: 70vh;
 	padding: 2vw;
 	display: flex;
 	justify-content: center;
@@ -103,6 +108,11 @@ aside fieldset {
 	align-items: center;
 }
 
+aside fieldset input[name="nazwa"] {
+	background-color: var(--bg);
+	color: var(--txt);
+}
+
 aside fieldset input[type="number"] {
 	width: 4em;
 	background-color: var(--bg);
@@ -110,6 +120,7 @@ aside fieldset input[type="number"] {
 }
 
 aside fieldset div.checkbox2 {
+	cursor: pointer;
 	width: 0.25em;
 	height: 0;
 	border-style: solid;
@@ -118,6 +129,7 @@ aside fieldset div.checkbox2 {
 }
 
 aside fieldset div.checkbox1 {
+	cursor: pointer;
 	width: 0;
 	height: 0;
 	margin-top: -1em;
@@ -127,6 +139,7 @@ aside fieldset div.checkbox1 {
 }
 
 aside fieldset div.checkbox0 {
+	cursor: pointer;
 	width: 0;
 	height: 0;
 	margin-top: 1em;
@@ -160,6 +173,11 @@ main div#main {
 	justify-content: center;
 	align-items: center;
 	font-size: larger;
+	color: var(--txt);
+}
+
+main #nothing-found {
+	font-size: xx-large;
 	color: var(--txt);
 }
 
@@ -240,6 +258,11 @@ footer a:visited {
 
 input[type="submit"],
 .div-submit {
+	display: block;
+	width: 4em;
+	font-size: medium;
+	cursor: pointer;
+	height: 1.25em;
 	text-decoration: none;
 	color: var(--txt);
 	border: 2px outset black;
@@ -250,10 +273,10 @@ input[type="submit"],
 
 input[type="submit"]:hover,
 .div-submit:hover {
-	background-color: var(--txtbg);
+	background-color: var(--darkbg);
 }
 
 input[type="submit"]:active,
 .div-submit:active {
-	background-color: #5f5f5f;
+	background-color: var(--darkerbg);
 }

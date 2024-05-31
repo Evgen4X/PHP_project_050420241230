@@ -1,17 +1,25 @@
-input#ilosc{
-    width: 3em;
-    outline: none;
-    border: none;
+input#ilosc {
+	width: 3em;
+	outline: none;
+	border: none;
+	background-color: var(--bg);
+	color: var(--txt);
 }
 
-table{
-    border-collapse: collapse;
+table {
+	border-collapse: collapse;
 }
 
-th, td{
-    border: 1px solid black;
+th,
+td {
+	border: 1px solid black;
+	color: var(--txt);
 }
 
-main{
-    padding-top: 5vh;
+input[type="submit"] {
+	height: 1.5em;
+}
+
+main {
+	padding-top: 5vh;
 }

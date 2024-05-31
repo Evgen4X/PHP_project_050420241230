@@ -8,7 +8,7 @@ if(!$id){
     $_SESSION['err'] = 1;
     $_SESSION['errdesc'] = mysqli_connect_error();
     $_SESSION['errcode'] = mysqli_connect_errno();
-    header('Location: order.php');
+    header('Location: index.php');
     die;
 }
 
@@ -17,14 +17,14 @@ if(!$res){
     $_SESSION['err'] = 2;
     $_SESSION['errdesc'] = mysqli_error();
     $_SESSION['errcode'] = mysqli_errno();
-    header('Location: order.php');
+    header('Location: index.php');
     die;
 }
 
 $_SESSION['err'] = 0;
 $_SESSION['errdesc'] = null;
 $_SESSION['errcode'] = null;
-header('Location: order.php');
+header('Location: index.php');
 die;
 
 ?>

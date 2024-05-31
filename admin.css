@@ -27,6 +27,7 @@ tr .delete {
 }
 
 tr input {
+	color: var(--txt);
 	height: 2em;
 	width: 90%;
 	outline: none;
@@ -36,7 +37,6 @@ tr input {
 
 tr .delete[id$="1"] {
 	background-image: url(unbin.png);
-	width: 2em;
 }
 
 tr input[name*="tytul"] {

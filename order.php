@@ -2,7 +2,7 @@
 session_start();
 ?>
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="pl" class="light">
 <head>
     <link rel="icon" href="icon.png">
     <link rel="stylesheet" href="index.css">
@@ -28,6 +28,7 @@ session_start();
     echo "Witaj, ".($imie ? substr($imie, 1, strlen($imie) - 2) : '').'!';
     echo "
         <div onclick='window.location.href = window.location.href.replace(\"order\", \"index\");'>Wróć</div>
+        <div id='light-dark-toggle' onclick='toggleTheme();'></div>
     </nav>";
     echo "<main>";
 
@@ -54,7 +55,6 @@ session_start();
 
         }
     }
-    var_dump($lista);
 
     echo "</main><footer>Created by <a href='https://github.com/Evgen4X'>Evgen4X</a></footer>";
 
@@ -73,5 +73,29 @@ session_start();
     </script>";
 
     ?>
+
+    <script>
+        function toggleTheme(){
+            html.classList.toggle('light');
+            html.classList.toggle('dark');
+            if(html.classList.contains('dark')){
+                localStorage.setItem('theme', 'dark')
+            } else {
+                localStorage.setItem('theme', 'light')
+            }
+            document.querySelectorAll('nav div:not([id="light-dark-toggle"])').forEach(div => {
+                div.style.backgroundColor = html.classList.contains('dark') ? '#6f6f6f' : '#3f3f3f';
+                div.style.borderColor = html.classList.contains('dark') ? '#6f6f6f' : '#3f3f3f';
+            });
+        }
+        const html = document.querySelector('html');
+
+        if(localStorage.getItem('theme') == 'dark'){
+            html.classList.toggle('light');
+            html.classList.toggle('dark');
+        }
+
+        const main = document.querySelector('main');
+    </script>
 </body>
 </html>
